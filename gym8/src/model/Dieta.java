@@ -44,4 +44,24 @@ public class Dieta {
 		refeicao.alterarAlimento(alimento, nome, qntd, calorias);
 	}
 	
+	public void listarRefeicoes() {		
+		int i = 1;		
+		
+		for(Refeicao r : refeicoes) {
+			System.out.println("Refeição " + i + ":");
+					
+			if(r.getAlimentos() != null && !r.getAlimentos().isEmpty()) {
+						r.listarAlimentos();	
+			}
+			else {
+				System.out.println(" - Nenhum alimento cadastrado.");
+			}
+					
+			System.out.println("Calorias totais: " + r.getCaloriasTotais());
+					
+			System.out.println();
+			i++;
+		}
+	}
+	
 }

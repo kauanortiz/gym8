@@ -57,4 +57,11 @@ public class Refeicao {
 		}
 	}
 	
+	public void listarAlimentos() {
+		alimentos.forEach((Alimento) -> {
+			System.out.println(" - " + Alimento.getNome() + " | Quantidade: " + Alimento.getQuantidade() +
+					" | Calorias: " + Alimento.calcularCalorias(Alimento.getCalorias(), Alimento.getQuantidade()) + " kcal");
+		});
+	}
+	
 }

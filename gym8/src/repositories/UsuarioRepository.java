@@ -64,13 +64,12 @@ public class UsuarioRepository {
 		
 		//bloco de informações básicas
 		if(usuarios.containsKey(cpf)) {
-			System.out.println("Nome: " + usr.getNome() + "\nCPF: " + cpf);
-			System.out.println("Idade: " + usr.getIdade() + "\nTempo de treino (em meses): " + usr.getTempoTreino());
-			System.out.println("Objetivo: " + usr.getObjetivo());
+			usr.gerarResumo();
 			
 			//bloco para informações detalhadas sobre o treino
 			if(usr.getTreinos() != null) {
 				System.out.println("-------------------------------\nTreinos do usuário:\n");
+				
 				for(Treino t : usr.getTreinos()) {
 					System.out.println("Duração média: " + t.getDuracao() + " minutos");
 					
@@ -91,28 +90,7 @@ public class UsuarioRepository {
 			if(usr.getDieta() != null) {
 				System.out.println("-------------------------------\nDieta do usuário:\n");
 				
-				int i = 1;
-				
-				for(Refeicao r : usr.getDieta().getRefeicoes()) {
-					
-					
-					System.out.println("Refeição " + i + ":");
-					
-					if(r.getAlimentos() != null && !r.getAlimentos().isEmpty()) {
-						for(Alimento a : r.getAlimentos()) {
-							System.out.println(" - " + a.getNome() + " | Quantidade: " + a.getQuantidade() +
-									" | Calorias: " + a.calcularCalorias(a.getCalorias(), a.getQuantidade()) + " kcal");
-						}
-					}
-					else {
-						System.out.println(" - Nenhum alimento cadastrado.");
-					}
-					
-					System.out.println("Calorias totais: " + r.getCaloriasTotais());
-					
-					System.out.println();
-					i++;
-				}
+				usr.getDieta().listarRefeicoes();
 				System.out.println("-------------------------------");
 			}
 			else {

@@ -122,4 +122,10 @@ public class Usuario {
 		System.out.println("Treino não encontrado!\n");
 	}
 	
+	public void gerarResumo() {
+		System.out.println("Nome: " + getNome() + "\nCPF: " + getCpf());
+		System.out.println("Idade: " + getIdade() + "\nTempo de treino (em meses): " + getTempoTreino());
+		System.out.println("Objetivo: " + getObjetivo());
+	}
+	
 }
