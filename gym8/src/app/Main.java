@@ -1,9 +1,15 @@
 package app;
 
-import model.Exercicio;
-import model.GrupoMuscular;
+import model.Dieta;
 import model.Treino;
 import model.Usuario;
+import model.alimentos.Alimento;
+import model.alimentos.Carboidrato;
+import model.alimentos.Proteina;
+import model.alimentos.Refeicao;
+import model.alimentos.Salada;
+import model.enums.GrupoMuscular;
+import model.treinamento.Exercicio;
 import repositories.UsuarioRepository;
 
 public class Main {
@@ -42,13 +48,30 @@ public class Main {
 		usrRepo.adicionar(usr1.getCpf(), usr1);
 		usrRepo.adicionar(usr2.getCpf(), usr2);
 		usrRepo.adicionar(usr3.getCpf(), usr3);
+
+		Alimento a1 = new Carboidrato("Arroz", 1.3, 150);
+		Alimento a2 = new Proteina("Carne", 1.8, 150);
+		Alimento a3 = new Salada("Alface", 0.15, 150);
 		
-		usrRepo.listarUsuarios();
+		Refeicao r1 = new Refeicao();
+		r1.adicionarAlimento(a1);
+		r1.adicionarAlimento(a2);
+		r1.adicionarAlimento(a3);
 		
-		usrRepo.alterarCPF(usr3.getCpf(), "98765432100", usr3);
-		usrRepo.alterarNome(usr1.getCpf(), usr1, "Kauanzap");
+		Alimento a4 = new Carboidrato("Arroz", 1.3, 100);
+		Alimento a5 = new Proteina("Carne", 1.8, 200);
+		Alimento a6 = new Salada("Alface", 0.15, 100);
 		
-		usrRepo.listarUsuarios();
+		Refeicao r2 = new Refeicao();
+		r2.adicionarAlimento(a4);
+		r2.adicionarAlimento(a5);
+		r2.adicionarAlimento(a6);
+		
+		Dieta d1 = new Dieta();
+		d1.adicionarRefeicao(r1);
+		d1.adicionarRefeicao(r2);
+		
+		usr1.setDieta(d1);
 		
 		usrRepo.consultar(usr1.getCpf(), usr1);
 		

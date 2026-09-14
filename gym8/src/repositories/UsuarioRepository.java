@@ -3,9 +3,11 @@ package repositories;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.GrupoMuscular;
 import model.Treino;
 import model.Usuario;
+import model.alimentos.Alimento;
+import model.alimentos.Refeicao;
+import model.enums.GrupoMuscular;
 
 public class UsuarioRepository {
 
@@ -59,11 +61,14 @@ public class UsuarioRepository {
 	}
 	
 	public void consultar(String cpf, Usuario usr) {
+		
+		//bloco de informações básicas
 		if(usuarios.containsKey(cpf)) {
 			System.out.println("Nome: " + usr.getNome() + "\nCPF: " + cpf);
 			System.out.println("Idade: " + usr.getIdade() + "\nTempo de treino (em meses): " + usr.getTempoTreino());
-			System.out.println("Objetivo: " + usr.getObjetivo() + "\nModelo de treino atual: " + usr.getModeloTreino());
+			System.out.println("Objetivo: " + usr.getObjetivo());
 			
+			//bloco para informações detalhadas sobre o treino
 			if(usr.getTreinos() != null) {
 				System.out.println("-------------------------------\nTreinos do usuário:\n");
 				for(Treino t : usr.getTreinos()) {
@@ -80,6 +85,38 @@ public class UsuarioRepository {
 			}
 			else {
 				System.out.println("Nenhum treino cadastrado para esse usuário!");
+			}
+			
+			//bloco para informações detalhadas sobre a dieta
+			if(usr.getDieta() != null) {
+				System.out.println("-------------------------------\nDieta do usuário:\n");
+				
+				int i = 1;
+				
+				for(Refeicao r : usr.getDieta().getRefeicoes()) {
+					
+					
+					System.out.println("Refeição " + i + ":");
+					
+					if(r.getAlimentos() != null && !r.getAlimentos().isEmpty()) {
+						for(Alimento a : r.getAlimentos()) {
+							System.out.println(" - " + a.getNome() + " | Quantidade: " + a.getQuantidade() +
+									" | Calorias: " + a.calcularCalorias(a.getCalorias(), a.getQuantidade()) + " kcal");
+						}
+					}
+					else {
+						System.out.println(" - Nenhum alimento cadastrado.");
+					}
+					
+					System.out.println("Calorias totais: " + r.getCaloriasTotais());
+					
+					System.out.println();
+					i++;
+				}
+				System.out.println("-------------------------------");
+			}
+			else {
+				System.out.println("Nenhuma dieta cadastrada para este usuário!");
 			}
 		}
 		else {

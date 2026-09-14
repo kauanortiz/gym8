@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import model.enums.GrupoMuscular;
+import model.treinamento.Exercicio;
+
 public class Treino {
 
 	private Integer duracao;

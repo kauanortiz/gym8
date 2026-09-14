@@ -1,4 +1,6 @@
-package model;
+package model.treinamento;
+
+import model.enums.GrupoMuscular;
 
 public class Exercicio {
 

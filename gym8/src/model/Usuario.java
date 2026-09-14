@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.enums.Objetivo;
+
 public class Usuario {
 
 	private String nome;
@@ -10,16 +12,15 @@ public class Usuario {
 	private Integer idade;
 	private Integer tempoTreino;
 	private Objetivo objetivo;
-	private ModeloTreino modeloTreino;
 	private List<Treino> treinos = new ArrayList<>();
+	private Dieta dieta;
 	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, ModeloTreino modeloTreino, List<Treino> treinos) {
+	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, List<Treino> treinos, Dieta dieta) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.tempoTreino = tempoTreino;
 		this.objetivo = objetivo;
-		this.modeloTreino = modeloTreino;
 		this.treinos = treinos;
 	}
 
@@ -84,14 +85,6 @@ public class Usuario {
 		this.objetivo = objetivo;
 	}
 
-	public ModeloTreino getModeloTreino() {
-		return modeloTreino;
-	}
-
-	public void setModeloTreino(ModeloTreino modeloTreino) {
-		this.modeloTreino = modeloTreino;
-	}
-
 	public List<Treino> getTreinos() {
 		return treinos;
 	}
@@ -100,6 +93,19 @@ public class Usuario {
 		this.treinos = treinos;
 	}
 	
+	public Dieta getDieta() {
+		return dieta;
+	}
+
+	public void setDieta(Dieta dieta) {
+		if(dieta != null) {
+			this.dieta = dieta;
+		}
+		else {
+			throw new IllegalArgumentException("Dieta inválida!");
+		}
+	}
+
 	public void adicionarTreino(Treino treino) {
 		treinos.add(treino);
 		
