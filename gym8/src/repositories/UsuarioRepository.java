@@ -3,6 +3,8 @@ package repositories;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.GrupoMuscular;
+import model.Treino;
 import model.Usuario;
 
 public class UsuarioRepository {
@@ -61,6 +63,27 @@ public class UsuarioRepository {
 			System.out.println("Nome: " + usr.getNome() + "\nCPF: " + cpf);
 			System.out.println("Idade: " + usr.getIdade() + "\nTempo de treino (em meses): " + usr.getTempoTreino());
 			System.out.println("Objetivo: " + usr.getObjetivo() + "\nModelo de treino atual: " + usr.getModeloTreino());
+			
+			if(usr.getTreinos() != null) {
+				System.out.println("-------------------------------\nTreinos do usuário:\n");
+				for(Treino t : usr.getTreinos()) {
+					System.out.println("Duração média: " + t.getDuracao() + " minutos");
+					
+					for(GrupoMuscular gm : t.getGruposMusculares()) {
+						System.out.println("Grupo(s) muscular(es): " + gm);
+					}
+					
+					System.out.println("\nExercícios:");
+					t.gerarResumo();
+					System.out.println("-------------------------------");
+				}
+			}
+			else {
+				System.out.println("Nenhum treino cadastrado para esse usuário!");
+			}
+		}
+		else {
+			System.out.println("Usuário não encontrado!");
 		}
 	}
 	

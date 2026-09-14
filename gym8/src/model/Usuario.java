@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
 
 	private String nome;
@@ -8,14 +11,16 @@ public class Usuario {
 	private Integer tempoTreino;
 	private Objetivo objetivo;
 	private ModeloTreino modeloTreino;
+	private List<Treino> treinos = new ArrayList<>();
 	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, ModeloTreino modeloTreino) {
+	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, ModeloTreino modeloTreino, List<Treino> treinos) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.tempoTreino = tempoTreino;
 		this.objetivo = objetivo;
 		this.modeloTreino = modeloTreino;
+		this.treinos = treinos;
 	}
 
 	public Usuario(String nome, String cpf) {
@@ -85,6 +90,30 @@ public class Usuario {
 
 	public void setModeloTreino(ModeloTreino modeloTreino) {
 		this.modeloTreino = modeloTreino;
+	}
+
+	public List<Treino> getTreinos() {
+		return treinos;
+	}
+
+	public void setTreinos(List<Treino> treinos) {
+		this.treinos = treinos;
+	}
+	
+	public void adicionarTreino(Treino treino) {
+		treinos.add(treino);
+		
+		System.out.println("Treino adicionado!\n");
+	}
+	
+	public void removerTreino(Treino treino) {
+		if(treinos.contains(treino)) {
+			treinos.remove(treino);
+			
+			System.out.println("Treino removido com sucesso!\n");
+		}
+		
+		System.out.println("Treino não encontrado!\n");
 	}
 	
 }
