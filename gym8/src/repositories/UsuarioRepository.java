@@ -1,7 +1,9 @@
 package repositories;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import model.Treino;
 import model.Usuario;
@@ -108,6 +110,31 @@ public class UsuarioRepository {
 		});
 		
 		System.out.println("\n");
+	}
+	
+	public List<Usuario> buscarParceirosProximos(Usuario usuarioBuscador, double raioMax){
+		
+		//.values() pega os usuários e ignora as chaves do map
+		return this.usuarios.values().stream().filter(u -> !u.getCpf().equals(usuarioBuscador.getCpf()))
+				
+				.filter(u -> calcularDistancia(usuarioBuscador.getLatitude(), usuarioBuscador.getLongitude(),
+				u.getLatitude(), u.getLongitude()) <= raioMax).collect(Collectors.toList()); //retorna a lista final
+	}
+	
+	private double calcularDistancia(double lat1, double lon1, double lat2, double lon2) {
+		final int RAIO_TERRA = 6371;
+		
+		double latDistance = Math.toRadians(lat2 - lat1);
+		double lonDistance = Math.toRadians(lon2 - lon1);
+		
+		//Fórmula de Haversine
+		double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+				+ Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+				* Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+		
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		
+		return RAIO_TERRA * c;
 	}
 	
 }

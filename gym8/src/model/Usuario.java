@@ -14,19 +14,29 @@ public class Usuario {
 	private Objetivo objetivo;
 	private List<Treino> treinos = new ArrayList<>();
 	private Dieta dieta;
+	private double latitude;
+	private double longitude;
 	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, List<Treino> treinos, Dieta dieta) {
+	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, List<Treino> treinos, Dieta dieta, double latitude, double longitude) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.tempoTreino = tempoTreino;
 		this.objetivo = objetivo;
-		this.treinos = treinos;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public Usuario(String nome, String cpf) {
 		this.nome = nome;
 		this.cpf = cpf;
+	}
+	
+	//construtor para teste dos filtros de localização
+	public Usuario(String nome, double latitude, double longitude) {
+		this.nome = nome;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public String getCpf() {
@@ -104,6 +114,22 @@ public class Usuario {
 		else {
 			throw new IllegalArgumentException("Dieta inválida!");
 		}
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public void adicionarTreino(Treino treino) {

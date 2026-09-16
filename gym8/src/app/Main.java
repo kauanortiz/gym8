@@ -1,5 +1,7 @@
 package app;
 
+import java.util.List;
+
 import model.Dieta;
 import model.Treino;
 import model.Usuario;
@@ -16,64 +18,26 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Usuario usr1 = new Usuario("Kauan", "11631772961");
-		Usuario usr2 = new Usuario("Joao", "11631772962");
-		Usuario usr3 = new Usuario("Pedro", "11631772963");
+		UsuarioRepository repo = new UsuarioRepository();
 		
-		Treino t1 = new Treino();
-		t1.setDuracao(90);
-		t1.adicionarGrupoMuscular(GrupoMuscular.COSTAS);
-		t1.adicionarGrupoMuscular(GrupoMuscular.BICEPS);
+		Usuario usr1 = new Usuario("Kauan", -23.5505, -46.6333);
+		Usuario usr2 = new Usuario("João", -23.5615, -46.6560);
+		Usuario usr3 = new Usuario("Pedro", -22.9068, -43.1729);
 		
-		Exercicio e1 = new Exercicio("Remada cavalo", 8, 12, GrupoMuscular.COSTAS);
-		Exercicio e2 = new Exercicio("Pulley frente", 8, 12, GrupoMuscular.COSTAS);
-		Exercicio e3 = new Exercicio("Puxada fechada", 8, 12, GrupoMuscular.COSTAS);
-		Exercicio e4 = new Exercicio("Remada upper back", 8, 12, GrupoMuscular.COSTAS);
-		Exercicio e5 = new Exercicio("Barra fixa", 8, 12, GrupoMuscular.COSTAS);
-		Exercicio e6 = new Exercicio("Rosca direta", 8, 12, GrupoMuscular.BICEPS);
-		Exercicio e7 = new Exercicio("Rosca martelo", 8, 12, GrupoMuscular.BICEPS);
+		usr1.setCpf("11631772961");
+		usr2.setCpf("11631772962");
+		usr3.setCpf("11631772963");
 		
-		t1.adicionar(e1);
-		t1.adicionar(e2);
-		t1.adicionar(e3);
-		t1.adicionar(e4);
-		t1.adicionar(e5);
-		t1.adicionar(e6);
-		t1.adicionar(e7);
+		repo.adicionar(usr1.getCpf(), usr1);
+		repo.adicionar(usr2.getCpf(), usr2);
+		repo.adicionar(usr3.getCpf(), usr3);
 		
-		usr1.adicionarTreino(t1);
+		List<Usuario> parceiros = repo.buscarParceirosProximos(usr1, 5.0);
 		
-		UsuarioRepository usrRepo = new UsuarioRepository();
-		
-		usrRepo.adicionar(usr1.getCpf(), usr1);
-		usrRepo.adicionar(usr2.getCpf(), usr2);
-		usrRepo.adicionar(usr3.getCpf(), usr3);
-
-		Alimento a1 = new Carboidrato("Arroz", 1.3, 150);
-		Alimento a2 = new Proteina("Carne", 1.8, 150);
-		Alimento a3 = new Salada("Alface", 0.15, 150);
-		
-		Refeicao r1 = new Refeicao();
-		r1.adicionarAlimento(a1);
-		r1.adicionarAlimento(a2);
-		r1.adicionarAlimento(a3);
-		
-		Alimento a4 = new Carboidrato("Arroz", 1.3, 100);
-		Alimento a5 = new Proteina("Carne", 1.8, 200);
-		Alimento a6 = new Salada("Alface", 0.15, 100);
-		
-		Refeicao r2 = new Refeicao();
-		r2.adicionarAlimento(a4);
-		r2.adicionarAlimento(a5);
-		r2.adicionarAlimento(a6);
-		
-		Dieta d1 = new Dieta();
-		d1.adicionarRefeicao(r1);
-		d1.adicionarRefeicao(r2);
-		
-		usr1.setDieta(d1);
-		
-		usrRepo.consultar(usr1.getCpf(), usr1);
+		System.out.println("Parceiros encontrados próximos ao " + usr1.getNome() + ":");
+		for(Usuario u : parceiros) {
+			System.out.println("- " + u.getNome());
+		}
 		
 	}
 
