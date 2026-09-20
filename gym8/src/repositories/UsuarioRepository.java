@@ -1,5 +1,7 @@
 package repositories;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,9 @@ import model.Treino;
 import model.Usuario;
 import model.alimentos.Alimento;
 import model.alimentos.Refeicao;
+import model.enums.Classificacao;
 import model.enums.GrupoMuscular;
+import model.enums.Sexo;
 
 public class UsuarioRepository {
 
@@ -135,6 +139,29 @@ public class UsuarioRepository {
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		
 		return RAIO_TERRA * c;
+	}
+	
+	public List<Usuario> buscarPorSexo(Usuario usuarioBuscador, Sexo sexo){
+		return this.usuarios.values().stream()
+			.filter(u -> u.getSexo() == sexo)
+			.toList();
+	}
+	
+	public List<Usuario> buscarPorClassificacao(Usuario usuarioBuscador, Classificacao classificacao){
+		return this.usuarios.values().stream()
+			.filter(u -> u.getClassificacao() == classificacao)
+			.toList();
+	}
+	
+	public List<Usuario> buscarPorTreino(Usuario usuarioBuscador, GrupoMuscular grupoMuscular){		
+		DayOfWeek hoje = LocalDate.now().getDayOfWeek();
+		
+		return this.usuarios.values().stream()
+			.filter(u -> !u.getCpf().equals(usuarioBuscador.getCpf()))
+			.filter(u -> u.getTreinos() != null && u.getTreinos().stream()
+			.anyMatch(treino -> treino.getDiaDaSemana().equals(hoje) &&
+					treino.getGruposMusculares().contains(grupoMuscular)))
+					.collect(Collectors.toList());
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.time.DayOfWeek;
 
 import model.enums.GrupoMuscular;
 import model.treinamento.Exercicio;
@@ -13,6 +14,7 @@ public class Treino {
 	private Integer duracao;
 	private Set<Exercicio> exercicios = new HashSet<>();
 	private List<GrupoMuscular> gruposMusculares = new ArrayList<>();
+	private DayOfWeek diaDaSemana;
 	
 	public Treino(Integer duracaoMedia, Set<Exercicio> exercicios) {
 		this.duracao = duracaoMedia;
@@ -46,6 +48,14 @@ public class Treino {
 		this.gruposMusculares = gruposMusculares;
 	}
 	
+	public DayOfWeek getDiaDaSemana() {
+		return diaDaSemana;
+	}
+
+	public void setDiaDaSemana(DayOfWeek diaDaSemana) {
+		this.diaDaSemana = diaDaSemana;
+	}
+
 	public void adicionarGrupoMuscular(GrupoMuscular grupoMuscular) {
 		gruposMusculares.add(grupoMuscular);
 		

@@ -3,28 +3,32 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.enums.Classificacao;
 import model.enums.Objetivo;
+import model.enums.Sexo;
 
 public class Usuario {
 
 	private String nome;
 	private String cpf;
 	private Integer idade;
-	private Integer tempoTreino;
+	private Classificacao classificacao;
 	private Objetivo objetivo;
 	private List<Treino> treinos = new ArrayList<>();
 	private Dieta dieta;
 	private double latitude;
 	private double longitude;
+	private Sexo sexo;
 	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, List<Treino> treinos, Dieta dieta, double latitude, double longitude) {
+	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, List<Treino> treinos, Dieta dieta, double latitude, double longitude, Sexo sexo) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
-		this.tempoTreino = tempoTreino;
+		this.classificacao = classificacao;
 		this.objetivo = objetivo;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.sexo = sexo;
 	}
 
 	public Usuario(String nome, String cpf) {
@@ -75,16 +79,12 @@ public class Usuario {
 		this.idade = idade;
 	}
 
-	public Integer getTempoTreino() {
-		return tempoTreino;
+	public Classificacao getClassificacao() {
+		return classificacao;
 	}
 
-	public void setTempoTreino(Integer tempoTreino) {
-		if(tempoTreino < 1) {
-			throw new IllegalArgumentException("Tempo em meses precisa ser maior que 1!");
-		}
-		
-		this.tempoTreino = tempoTreino;
+	public void setClassificacao(Classificacao classificacao) {
+		this.classificacao = classificacao;
 	}
 
 	public Objetivo getObjetivo() {
@@ -132,6 +132,14 @@ public class Usuario {
 		this.longitude = longitude;
 	}
 
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
 	public void adicionarTreino(Treino treino) {
 		treinos.add(treino);
 		
@@ -150,7 +158,7 @@ public class Usuario {
 	
 	public void gerarResumo() {
 		System.out.println("Nome: " + getNome() + "\nCPF: " + getCpf());
-		System.out.println("Idade: " + getIdade() + "\nTempo de treino (em meses): " + getTempoTreino());
+		System.out.println("Idade: " + getIdade() + "\nClassificação: " + getClassificacao());
 		System.out.println("Objetivo: " + getObjetivo());
 	}
 	
