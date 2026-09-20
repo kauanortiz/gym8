@@ -6,6 +6,7 @@ import java.util.List;
 import model.enums.Classificacao;
 import model.enums.Objetivo;
 import model.enums.Sexo;
+import model.treinamento.Convite;
 
 public class Usuario {
 
@@ -14,13 +15,16 @@ public class Usuario {
 	private Integer idade;
 	private Classificacao classificacao;
 	private Objetivo objetivo;
+	private Sexo sexo;
 	private List<Treino> treinos = new ArrayList<>();
+	private List<Convite> convitesRecebidos = new ArrayList<>();
 	private Dieta dieta;
 	private double latitude;
 	private double longitude;
-	private Sexo sexo;
 	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Objetivo objetivo, List<Treino> treinos, Dieta dieta, double latitude, double longitude, Sexo sexo) {
+	
+	
+	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Classificacao classificacao, Objetivo objetivo, Sexo sexo, Dieta dieta, double latitude, double longitude) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
@@ -138,6 +142,18 @@ public class Usuario {
 
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+
+	public List<Convite> getConvitesRecebidos() {
+		return convitesRecebidos;
+	}
+
+	public void setConvitesRecebidos(List<Convite> convitesRecebidos) {
+		this.convitesRecebidos = convitesRecebidos;
+	}
+	
+	public void receberConvite(Convite convite) {
+		this.convitesRecebidos.add(convite);
 	}
 
 	public void adicionarTreino(Treino treino) {

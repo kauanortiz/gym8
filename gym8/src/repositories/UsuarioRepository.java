@@ -2,6 +2,7 @@ package repositories;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import model.alimentos.Refeicao;
 import model.enums.Classificacao;
 import model.enums.GrupoMuscular;
 import model.enums.Sexo;
+import model.treinamento.Convite;
 
 public class UsuarioRepository {
 
@@ -162,6 +164,23 @@ public class UsuarioRepository {
 			.anyMatch(treino -> treino.getDiaDaSemana().equals(hoje) &&
 					treino.getGruposMusculares().contains(grupoMuscular)))
 					.collect(Collectors.toList());
+	}
+	
+	public void enviarConviteDeTreino(String cpfRemetente, String cpfDestinatario, LocalDateTime horario) {
+        if(usuarios.containsKey(cpfRemetente) && usuarios.containsKey(cpfDestinatario)){
+            Usuario remetente = usuarios.get(cpfRemetente);
+            Usuario destinatario = usuarios.get(cpfDestinatario);
+            
+            Convite novoConvite = new Convite(remetente, destinatario, horario);
+            
+            destinatario.receberConvite(novoConvite);
+            
+            System.out.println("Convite enviado com sucesso de " + remetente.getNome() + 
+                               " para " + destinatario.getNome() + "!\n");
+        }
+        else{
+            System.out.println("Erro: Usuário remetente ou destinatário não encontrado!\n");
+        }
 	}
 	
 }
