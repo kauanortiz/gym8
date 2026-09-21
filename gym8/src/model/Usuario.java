@@ -21,10 +21,10 @@ public class Usuario {
 	private Dieta dieta;
 	private double latitude;
 	private double longitude;
+	private String senha;
 	
 	
-	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Classificacao classificacao, Objetivo objetivo, Sexo sexo, Dieta dieta, double latitude, double longitude) {
+	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Classificacao classificacao, Objetivo objetivo, Sexo sexo, Dieta dieta, double latitude, double longitude, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
@@ -33,6 +33,7 @@ public class Usuario {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.sexo = sexo;
+		this.senha = senha;
 	}
 
 	public Usuario(String nome, String cpf) {
@@ -152,6 +153,14 @@ public class Usuario {
 		this.convitesRecebidos = convitesRecebidos;
 	}
 	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public void receberConvite(Convite convite) {
 		this.convitesRecebidos.add(convite);
 	}

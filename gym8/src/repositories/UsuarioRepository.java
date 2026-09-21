@@ -1,5 +1,4 @@
-/*FALTA IMPLEMENTAR ALTERAÇÃO DE TREINO E DIETA
-  IMPLEMENTAR MESCLAGEM DE FILTROS
+/*IMPLEMENTAR MESCLAGEM DE FILTROS
   IMPLEMENTAR LOGIN PARA ALTERNAR ENTRE USUÁRIOS
   IMPLEMENTAR ACEITE E REJEITE DE CONVITES DE TREINO*/
 
@@ -186,6 +185,16 @@ public class UsuarioRepository {
         else{
             System.out.println("Erro: Usuário remetente ou destinatário não encontrado!\n");
         }
+	}
+	
+	public Usuario autenticar(String cpf, String senha) {
+		Usuario u = usuarios.get(cpf);
+		
+		if(u != null && u.getSenha().equals(senha)) {
+			return u;
+		}
+		
+		return null;
 	}
 	
 }
