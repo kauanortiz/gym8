@@ -224,6 +224,14 @@ public class UsuarioRepository {
 			System.out.println("Horário: " + c.getDataHorario());
 		}
 	}
+
+	public Map<String, Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Map<String, Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 	
 	/*public void gerenciarConvites(Usuario usuario) {
 		for(Convite c : usuario.getConvitesRecebidos()) {

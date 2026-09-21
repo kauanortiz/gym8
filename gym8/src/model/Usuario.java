@@ -24,15 +24,15 @@ public class Usuario {
 	private String senha;
 	
 	
-	public Usuario(String nome, String cpf, Integer idade, Integer tempoTreino, Classificacao classificacao, Objetivo objetivo, Sexo sexo, Dieta dieta, double latitude, double longitude, String senha) {
+	public Usuario(String nome, String cpf, Integer idade, Classificacao classificacao, Objetivo objetivo, Sexo sexo, double latitude, double longitude, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.classificacao = classificacao;
 		this.objetivo = objetivo;
+		this.sexo = sexo;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.sexo = sexo;
 		this.senha = senha;
 	}
 
