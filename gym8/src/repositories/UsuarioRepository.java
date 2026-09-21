@@ -1,6 +1,4 @@
-/*IMPLEMENTAR MESCLAGEM DE FILTROS
-  IMPLEMENTAR LOGIN PARA ALTERNAR ENTRE USUÁRIOS
-  IMPLEMENTAR ACEITE E REJEITE DE CONVITES DE TREINO*/
+/*IMPLEMENTAR ACEITE E REJEITE DE CONVITES DE TREINO*/
 
 package repositories;
 
@@ -12,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import model.FiltroBusca;
 import model.Treino;
 import model.Usuario;
 import model.alimentos.Alimento;
@@ -170,6 +169,26 @@ public class UsuarioRepository {
 					.collect(Collectors.toList());
 	}
 	
+	public List<Usuario> buscarParceirosAvancado(Usuario buscador, FiltroBusca filtros){
+		
+		return this.usuarios.values().stream()
+			.filter(u -> !u.getCpf().equals(buscador.getCpf()))
+			
+			.filter(u -> calcularDistancia(
+					buscador.getLatitude(), buscador.getLongitude(),
+					u.getLatitude(), u.getLongitude()) <= filtros.getRaioMaxKm())
+			
+			.filter(u -> filtros.getSexoDesejado() == null || u.getSexo() == filtros.getSexoDesejado())
+			
+			.filter(u -> filtros.getClassificacaoDesejada() == null || u.getClassificacao() == filtros.getClassificacaoDesejada())
+			
+			.filter(u -> filtros.getGrupoDesejado() == null ||
+				(u.getTreinos() != null && u.getTreinos().stream()
+					.anyMatch(t -> t.getGruposMusculares().contains(filtros.getGrupoDesejado()))))
+			
+			.collect(Collectors.toList());
+	}
+	
 	public void enviarConviteDeTreino(String cpfRemetente, String cpfDestinatario, LocalDateTime horario) {
         if(usuarios.containsKey(cpfRemetente) && usuarios.containsKey(cpfDestinatario)){
             Usuario remetente = usuarios.get(cpfRemetente);
@@ -196,5 +215,25 @@ public class UsuarioRepository {
 		
 		return null;
 	}
+	
+	public void listarConvites(Usuario usuario) {
+		for(Convite c : usuario.getConvitesRecebidos()) {
+			System.out.println("Remetente: " + c.getRemetente().getNome());
+			System.out.println("Idade: " + c.getRemetente().getIdade());
+			System.out.println("Classificação: " + c.getRemetente().getClassificacao());
+			System.out.println("Horário: " + c.getDataHorario());
+		}
+	}
+	
+	/*public void gerenciarConvites(Usuario usuario) {
+		for(Convite c : usuario.getConvitesRecebidos()) {
+			System.out.println("Remetente: " + c.getRemetente().getNome());
+			System.out.println("Idade: " + c.getRemetente().getIdade());
+			System.out.println("Classificação: " + c.getRemetente().getClassificacao());
+			System.out.println("Horário: " + c.getDataHorario());
+			
+			System.out.println("Aceitar(A) ou rejeitar(R)?");
+		}
+	}*/
 	
 }
