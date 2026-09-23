@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.enums.Classificacao;
+import model.enums.DiasDaSemana;
 import model.enums.Objetivo;
 import model.enums.Sexo;
 import model.treinamento.Convite;
@@ -164,8 +165,21 @@ public class Usuario {
 	public void receberConvite(Convite convite) {
 		this.convitesRecebidos.add(convite);
 	}
+	
+	public boolean temTreinoNoDia(DiasDaSemana dia) {
+        for (Treino treino : treinos) {
+            if (treino.getDia() == dia) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	public void adicionarTreino(Treino treino) {
+		if(temTreinoNoDia(treino.getDia())) {
+			throw new IllegalArgumentException("Já existe um treino cadastrado para este dia!");
+		}
+		
 		treinos.add(treino);
 		
 		System.out.println("Treino adicionado!\n");

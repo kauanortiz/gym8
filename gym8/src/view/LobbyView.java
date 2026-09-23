@@ -10,14 +10,14 @@ public class LobbyView extends JPanel {
 
     private JTabbedPane painelDeAbas;
     private JButton logoutButton;
+    private AbaTreinosView abaTreinos;
 
     public LobbyView() {
         setLayout(new BorderLayout());
 
         painelDeAbas = new JTabbedPane();
 
-        JPanel abaTreinos = new JPanel();
-        abaTreinos.add(new JLabel("Área para cadastrar e ver treinos"));
+        abaTreinos = new AbaTreinosView();
 
         JPanel abaDietas = new JPanel();
         abaDietas.add(new JLabel("Área para gerir a alimentação"));
@@ -39,7 +39,11 @@ public class LobbyView extends JPanel {
         add(logoutButton, BorderLayout.SOUTH);
     }
 
-    public JButton getBtnLogout() {
+    public JButton getLogoutButton() {
         return logoutButton;
     }
+
+	public AbaTreinosView getAbaTreinos() {
+		return abaTreinos;
+	}   
 }

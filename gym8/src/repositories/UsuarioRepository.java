@@ -164,7 +164,7 @@ public class UsuarioRepository {
 		return this.usuarios.values().stream()
 			.filter(u -> !u.getCpf().equals(usuarioBuscador.getCpf()))
 			.filter(u -> u.getTreinos() != null && u.getTreinos().stream()
-			.anyMatch(treino -> treino.getDiaDaSemana().equals(hoje) &&
+			.anyMatch(treino -> treino.getDia().equals(hoje) &&
 					treino.getGruposMusculares().contains(grupoMuscular)))
 					.collect(Collectors.toList());
 	}

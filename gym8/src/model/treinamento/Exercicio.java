@@ -7,9 +7,10 @@ public class Exercicio {
 	private String nome;
 	private Integer repsMinimas;
 	private Integer repsMaximas;
+	private Integer series;
 	private GrupoMuscular grupoMuscular;
 	
-	public Exercicio(String nome, Integer repsMinimas, Integer repsMaximas, GrupoMuscular grupoMuscular) {
+	public Exercicio(String nome, Integer repsMinimas, Integer repsMaximas, Integer series, GrupoMuscular grupoMuscular) {
 		this.nome = nome;
 		this.repsMinimas = repsMinimas;
 		this.repsMaximas = repsMaximas;
@@ -56,5 +57,15 @@ public class Exercicio {
 	public void setGrupoMuscular(GrupoMuscular grupoMuscular) {
 		this.grupoMuscular = grupoMuscular;
 	}
-	
+
+	public Integer getSeries() {
+		return series;
+	}
+
+	public void setSeries(Integer series) {
+		if(series <= 0) {
+			throw new IllegalArgumentException("Quantidade inválida!");
+		}
+		this.series = series;
+	}	
 }

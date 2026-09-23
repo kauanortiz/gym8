@@ -2,6 +2,7 @@ package controller;
 
 import view.GestorDeTelas;
 import repositories.UsuarioRepository;
+import session.SessaoUsuario;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -29,37 +30,28 @@ public class GestorController {
     }
 
     private void iniciarControladoresDeNavegacao() {
-    	view.getTelaLogin().getCadastrarButton().addActionListener(e -> {
+    	view.getTelaLogin().getCadastrarButton().addActionListener(e -> {   		
+    		view.getTela1().getNomeField().setText("");
+    		view.getTela1().getCpfField().setText("");
+    		view.getTela1().getSenhaField().setText("");
+    		view.getTela1().getConfirmacaoField().setText("");
     		view.mostrarEcra("PASSO_1");
     	});
     	
     	view.getTelaLogin().getEntrarButton().addActionListener(e -> {
     		String cpf = view.getTelaLogin().getCpfField().getText();
     		String senha = new String(view.getTelaLogin().getSenhaField().getPassword());
-    		int index = 0;
     		
-    		for(Usuario u : repository.getUsuarios().values()) {
-    			if(u.getCpf().equals(cpf)){
-    				index = 1;
-    				
-    				if(senha == u.getSenha()) {
-    					JOptionPane.showMessageDialog(
-    	    	                view,"Acesso liberado!");
-    					view.mostrarEcra("LOBBY");
-    				}
-    				else {
-    					JOptionPane.showMessageDialog(
-    	    	                view,"Senha incorreta!");
-    					return;
-    				}
-    			}
-    		}
-    		
-    		if(index == 0) {
-    			JOptionPane.showMessageDialog(
-    	                view,"CPF não cadastrado!");
-    		}
-    		
+    		Usuario usrLogado = repository.autenticar(cpf, senha);
+
+    	    if(usrLogado != null){
+    	        SessaoUsuario.setUsuarioLogado(usrLogado);
+    	        JOptionPane.showMessageDialog(view, "Bem-vindo, " + usrLogado.getNome() + "!");
+    	        view.mostrarEcra("LOBBY");
+    	        
+    	    }else{
+    	        JOptionPane.showMessageDialog(view, "CPF não cadastrado ou senha incorreta!");
+    		}   		
     	});
     	
     	view.getTela1().getProximoButton().addActionListener(e -> {
@@ -67,6 +59,7 @@ public class GestorController {
     	    String nome = view.getTela1().getNomeField().getText();
     	    String cpf = view.getTela1().getCpfField().getText();
     	    String senha = new String(view.getTela1().getSenhaField().getPassword());
+    	    String confirmacao = new String(view.getTela1().getConfirmacaoField().getPassword());
     	    
         	if(nome.isBlank()){
     	        JOptionPane.showMessageDialog(
@@ -116,6 +109,15 @@ public class GestorController {
         	    return;
         	}
         	
+        	if(!senha.equals(confirmacao)){
+        		JOptionPane.showMessageDialog(view, "As senhas não conferem!");
+        	    return;
+        	}
+        	
+        	view.getTela2().getDataNascimentoField().setText("");
+        	view.getTela2().getSexoComboBox().setSelectedIndex(-1);
+        	view.getTela2().getObjetivoComboBox().setSelectedIndex(-1);
+        	view.getTela2().getClassificacaoComboBox().setSelectedIndex(-1);
     	    view.mostrarEcra("PASSO_2");
     	});
 
@@ -170,6 +172,9 @@ public class GestorController {
         	    return;
         	}
         	
+        	view.getTela3().getRuaField().setText("");
+        	view.getTela3().getNumeroSpinner().setValue(1);
+        	view.getTela3().getCidadeField().setText("");
         	view.mostrarEcra("PASSO_3");
         	});
 
@@ -212,11 +217,14 @@ public class GestorController {
         	
         	cadastrar();       	
             finalizarCadastro();
+            Usuario usrLogado = repository.autenticar(view.getTela1().getCpfField().getText(), new String(view.getTela1().getSenhaField().getPassword()));
+			SessaoUsuario.setUsuarioLogado(usrLogado);         
         });
         
-        view.getTelaLobby().getBtnLogout().addActionListener(e ->{
-        	view.getTela1().getCpfField().setText("");
-        	view.getTela1().getSenhaField().setText("");
+        view.getTelaLobby().getLogoutButton().addActionListener(e ->{
+        	SessaoUsuario.limparSessao();
+        	view.getTelaLogin().getCpfField().setText("");
+        	view.getTelaLogin().getSenhaField().setText("");
         	view.mostrarEcra("LOGIN");
         });
     }

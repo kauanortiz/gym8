@@ -15,6 +15,8 @@ public class Cadastro1View extends JPanel {
     private JPasswordField senhaField;
     private JLabel cadastroLabel;
     private JButton proximoButton;
+    private JLabel confirmacaoLabel;
+    private JPasswordField confirmacaoField;
 
     public Cadastro1View() {
         setLayout(null);
@@ -36,21 +38,21 @@ public class Cadastro1View extends JPanel {
         
         JLabel cpfLabel = new JLabel("CPF:");
         cpfLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        cpfLabel.setBounds(50, 147, 46, 24);
+        cpfLabel.setBounds(54, 127, 46, 24);
         add(cpfLabel);
         
         cpfField = new JTextField();
-        cpfField.setBounds(86, 146, 208, 20);
+        cpfField.setBounds(106, 126, 208, 20);
         cpfField.setColumns(10);
         add(cpfField);
         
         JLabel senhaLabel = new JLabel("Senha:");
         senhaLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        senhaLabel.setBounds(50, 203, 46, 20);
+        senhaLabel.setBounds(54, 162, 46, 20);
         add(senhaLabel);
         
         senhaField = new JPasswordField();
-        senhaField.setBounds(106, 200, 208, 20);
+        senhaField.setBounds(106, 159, 208, 20);
         add(senhaField);
         
         cadastroLabel = new JLabel("Cadastro");
@@ -62,6 +64,15 @@ public class Cadastro1View extends JPanel {
         proximoButton.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
         proximoButton.setBounds(345, 256, 95, 33);
         add(proximoButton);
+        
+        confirmacaoLabel = new JLabel("Confirme a senha:");
+        confirmacaoLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
+        confirmacaoLabel.setBounds(54, 193, 124, 24);
+        add(confirmacaoLabel);
+        
+        confirmacaoField = new JPasswordField();
+        confirmacaoField.setBounds(177, 192, 208, 20);
+        add(confirmacaoField);
     }
     
     public JButton getProximoButton() {
@@ -92,8 +103,8 @@ public class Cadastro1View extends JPanel {
 		return senhaField;
 	}
 
-	public void setSenhaField(JPasswordField senhaField) {
-		this.senhaField = senhaField;
+	public JPasswordField getConfirmacaoField() {
+		return confirmacaoField;
 	}
 
 	public JLabel getCadastroLabel() {
