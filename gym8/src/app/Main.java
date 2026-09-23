@@ -1,7 +1,7 @@
 package app;
 
-import view.TelaCadastroPrincipal;
-import controller.CadastroController;
+import view.GestorDeTelas;
+import controller.GestorController;
 import repositories.UsuarioRepository;
 import javax.swing.SwingUtilities;
 
@@ -12,13 +12,13 @@ public class Main {
             UsuarioRepository repo = new UsuarioRepository();
             
             // 2. Instancia a View (Janela)
-            TelaCadastroPrincipal tela = new TelaCadastroPrincipal();
+            GestorDeTelas view = new GestorDeTelas();
             
             // 3. Instancia o Controller ligando a View ao Repositório
-            CadastroController controller = new CadastroController(tela, repo);
+            GestorController controller = new GestorController(view, repo);
             
             // 4. Mostra a interface ao utilizador
-            tela.setVisible(true);
+            view.setVisible(true);
         });
     }
 }

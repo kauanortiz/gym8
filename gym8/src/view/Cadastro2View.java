@@ -18,10 +18,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-public class Tela2View extends JPanel {
+public class Cadastro2View extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JButton voltarButton;
 	private JButton proximoButton;
 	private JFormattedTextField dataNascimentoField;
@@ -29,26 +28,7 @@ public class Tela2View extends JPanel {
 	private JComboBox objetivoComboBox;
 	private JComboBox classificacaoComboBox;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Tela2View frame = new Tela2View();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Tela2View() {
+	public Cadastro2View() {
 		setLayout(null);
 		
 		JLabel tituloLabel = new JLabel("GYM8 ");

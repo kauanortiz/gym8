@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-public class Tela1View extends JPanel {
+public class Cadastro1View extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JTextField nomeField;
@@ -16,13 +16,13 @@ public class Tela1View extends JPanel {
     private JLabel cadastroLabel;
     private JButton proximoButton;
 
-    public Tela1View() {
+    public Cadastro1View() {
         setLayout(null);
         
         JLabel tituloLabel = new JLabel("GYM8 ");
         tituloLabel.setBounds(10, 11, 63, 33);
         tituloLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 20));
-        add(tituloLabel); // Adiciona diretamente ao painel principal
+        add(tituloLabel);
         
         JLabel nomeLabel = new JLabel("Nome:");
         nomeLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 14));

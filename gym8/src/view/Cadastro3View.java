@@ -12,36 +12,16 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JSpinner;
 
-public class Tela3View extends JPanel {
+public class Cadastro3View extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JTextField ruaField;
 	private JTextField cidadeField;
 	private JButton voltarButton;
     private JButton finalizarButton;
     private JSpinner numeroSpinner;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Tela3View frame = new Tela3View();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Tela3View() {
+	public Cadastro3View() {
 		setLayout(null);
 		
 		JLabel tituloLabel = new JLabel("GYM8 ");

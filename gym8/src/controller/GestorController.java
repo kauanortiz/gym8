@@ -1,6 +1,6 @@
 package controller;
 
-import view.TelaCadastroPrincipal;
+import view.GestorDeTelas;
 import repositories.UsuarioRepository;
 
 import java.time.LocalDate;
@@ -16,12 +16,12 @@ import model.enums.Classificacao;
 import model.enums.Objetivo;
 import model.enums.Sexo;
 
-public class CadastroController {
+public class GestorController {
     
-    private TelaCadastroPrincipal view;
+    private GestorDeTelas view;
     private UsuarioRepository repository;
 
-    public CadastroController(TelaCadastroPrincipal view, UsuarioRepository repository) {
+    public GestorController(GestorDeTelas view, UsuarioRepository repository) {
         this.view = view;
         this.repository = repository;
         
@@ -29,6 +29,39 @@ public class CadastroController {
     }
 
     private void iniciarControladoresDeNavegacao() {
+    	view.getTelaLogin().getCadastrarButton().addActionListener(e -> {
+    		view.mostrarEcra("PASSO_1");
+    	});
+    	
+    	view.getTelaLogin().getEntrarButton().addActionListener(e -> {
+    		String cpf = view.getTelaLogin().getCpfField().getText();
+    		String senha = new String(view.getTelaLogin().getSenhaField().getPassword());
+    		int index = 0;
+    		
+    		for(Usuario u : repository.getUsuarios().values()) {
+    			if(u.getCpf().equals(cpf)){
+    				index = 1;
+    				
+    				if(senha == u.getSenha()) {
+    					JOptionPane.showMessageDialog(
+    	    	                view,"Acesso liberado!");
+    					view.mostrarEcra("LOBBY");
+    				}
+    				else {
+    					JOptionPane.showMessageDialog(
+    	    	                view,"Senha incorreta!");
+    					return;
+    				}
+    			}
+    		}
+    		
+    		if(index == 0) {
+    			JOptionPane.showMessageDialog(
+    	                view,"CPF não cadastrado!");
+    		}
+    		
+    	});
+    	
     	view.getTela1().getProximoButton().addActionListener(e -> {
     	    
     	    String nome = view.getTela1().getNomeField().getText();
@@ -180,12 +213,18 @@ public class CadastroController {
         	cadastrar();       	
             finalizarCadastro();
         });
+        
+        view.getTelaLobby().getBtnLogout().addActionListener(e ->{
+        	view.getTela1().getCpfField().setText("");
+        	view.getTela1().getSenhaField().setText("");
+        	view.mostrarEcra("LOGIN");
+        });
     }
 
     private void finalizarCadastro() {
         
         JOptionPane.showMessageDialog(view, "Utilizador registrado com sucesso no Repositório!");
-        view.dispose();
+        view.mostrarEcra("LOBBY");
     }
     
     public void cadastrar() {
