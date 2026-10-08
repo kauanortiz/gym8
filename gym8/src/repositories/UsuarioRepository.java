@@ -5,6 +5,7 @@ package repositories;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,36 @@ public class UsuarioRepository {
 		System.out.println("\n");
 	}
 	
+	public List<Usuario> buscarPorFiltroClassificacao(FiltroBusca filtro) {
+	    List<Usuario> compativeis = new ArrayList<>();
+	    
+	    for(Usuario u : usuarios.values()) {
+	        boolean match = true;
+	        
+	        if(filtro.getClassificacaoDesejada() != null && !filtro.getClassificacaoDesejada().equals(u.getClassificacao())) {
+	            match = false;
+	        }
+	        
+	        if(filtro.getSexoDesejado() != null && !filtro.getSexoDesejado().equals(u.getSexo())) {
+	            match = false;
+	        }
+	        
+	        if(match) {
+	            compativeis.add(u);
+	        }
+	    }
+	    return compativeis;
+	}
+
+	public Usuario buscarPorNome(String nome) {
+	    for(Usuario u : usuarios.values()) {
+	        if(u.getNome().equals(nome)) {
+	            return u;
+	        }
+	    }
+	    return null;
+	}
+	
 	public List<Usuario> buscarParceirosProximos(Usuario usuarioBuscador, double raioMax){
 		
 		//.values() pega os usuários e ignora as chaves do map
@@ -130,7 +161,7 @@ public class UsuarioRepository {
 				u.getLatitude(), u.getLongitude()) <= raioMax).collect(Collectors.toList()); //retorna a lista final
 	}
 	
-	private double calcularDistancia(double lat1, double lon1, double lat2, double lon2) {
+	public double calcularDistancia(double lat1, double lon1, double lat2, double lon2) {
 		final int RAIO_TERRA = 6371;
 		
 		double latDistance = Math.toRadians(lat2 - lat1);

@@ -18,6 +18,11 @@ public class Convite {
 		this.dataHorario = dataHorario;
 		this.status = Status.PENDENTE;
 	}
+	
+	public Convite(Usuario remetente, Usuario destinatario) {
+		this.remetente = remetente;
+		this.destinatario = destinatario;
+	}
 
 	public Usuario getRemetente() {
 		return remetente;

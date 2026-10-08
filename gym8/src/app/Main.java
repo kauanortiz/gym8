@@ -3,6 +3,7 @@ package app;
 import view.GestorDeTelas;
 import controller.DietasController;
 import controller.GestorController;
+import controller.ParceirosController;
 import controller.TreinosController;
 import repositories.UsuarioRepository;
 import javax.swing.SwingUtilities;
@@ -20,6 +21,8 @@ public class Main {
             TreinosController treinoController = new TreinosController(view.getTelaLobby().getAbaTreinos(), repo);
             
             DietasController dietaController = new DietasController(view.getTelaLobby().getAbaDietas(), repo);
+            
+            ParceirosController parceiroController = new ParceirosController(view.getTelaLobby().getAbaParceiros(), repo);
             
             view.setVisible(true);
         });
