@@ -11,6 +11,7 @@ public class LobbyView extends JPanel {
     private JTabbedPane painelDeAbas;
     private JButton logoutButton;
     private AbaTreinosView abaTreinos;
+    private AbaDietaView abaDietas;
 
     public LobbyView() {
         setLayout(new BorderLayout());
@@ -19,8 +20,7 @@ public class LobbyView extends JPanel {
 
         abaTreinos = new AbaTreinosView();
 
-        JPanel abaDietas = new JPanel();
-        abaDietas.add(new JLabel("Área para gerir a alimentação"));
+        abaDietas = new AbaDietaView();
 
         JPanel abaParceiros = new JPanel();
         abaParceiros.add(new JLabel("Encontre parceiros de treino aqui"));
@@ -45,5 +45,9 @@ public class LobbyView extends JPanel {
 
 	public AbaTreinosView getAbaTreinos() {
 		return abaTreinos;
+	}
+	
+	public AbaDietaView getAbaDietas() {
+		return abaDietas;
 	}   
 }

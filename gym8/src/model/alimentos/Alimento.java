@@ -1,15 +1,19 @@
 package model.alimentos;
 
-public abstract class Alimento {
+import model.enums.TipoAlimento;
+
+public class Alimento {
 
 	private String nome;
 	private double calorias;
 	private Integer quantidade;
+	private TipoAlimento tipoAlimento;
 	
-	public Alimento(String nome, double calorias, Integer quantidade) {
+	public Alimento(String nome, double calorias, Integer quantidade, TipoAlimento tipoAlimento) {
 		this.nome = nome;
 		this.calorias = calorias;
 		this.quantidade = quantidade;
+		this.tipoAlimento = tipoAlimento;
 	}
 
 	public String getNome() {
@@ -49,6 +53,14 @@ public abstract class Alimento {
 		else {
 			this.quantidade = quantidade;
 		}
+	}
+
+	public TipoAlimento getTipoAlimento() {
+		return tipoAlimento;
+	}
+
+	public void setTipoAlimento(TipoAlimento tipoAlimento) {
+		this.tipoAlimento = tipoAlimento;
 	}
 
 	public double calcularCalorias(double calorias, Integer quantidade) {

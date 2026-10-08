@@ -1,6 +1,7 @@
 package app;
 
 import view.GestorDeTelas;
+import controller.DietasController;
 import controller.GestorController;
 import controller.TreinosController;
 import repositories.UsuarioRepository;
@@ -17,6 +18,8 @@ public class Main {
             GestorController controller = new GestorController(view, repo);
             
             TreinosController treinoController = new TreinosController(view.getTelaLobby().getAbaTreinos(), repo);
+            
+            DietasController dietaController = new DietasController(view.getTelaLobby().getAbaDietas(), repo);
             
             view.setVisible(true);
         });
