@@ -44,7 +44,7 @@ public class Treino {
 	public List<GrupoMuscular> getGruposMusculares() {
 		return gruposMusculares;
 	}
-
+	
 	public void setGruposMusculares(List<GrupoMuscular> gruposMusculares) {
 		this.gruposMusculares = gruposMusculares;
 	}

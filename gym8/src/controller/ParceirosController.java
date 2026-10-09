@@ -84,7 +84,7 @@ public class ParceirosController {
 
         String nomeDestinatario = (String) view.getTableModel().getValueAt(linhaSelecionada, 0);
         Usuario destinatario = repository.buscarPorNome(nomeDestinatario);
-        Usuario remetente = SessaoUsuario.getUsuarioLogado(); //[cite: 9]
+        Usuario remetente = SessaoUsuario.getUsuarioLogado();
 
         if(destinatario != null) {
             Convite convite = new Convite(remetente, destinatario);

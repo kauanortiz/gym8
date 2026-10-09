@@ -46,15 +46,14 @@ public class AbaParceirosView extends JPanel {
         buscarButton.setBounds(380, 15, 140, 20);
         add(buscarButton);
 
-        // Tabela atualizada com a coluna de Distância
         tableModel = new DefaultTableModel(new Object[]{"Nome", "Distância (km)", "Classificação"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Impede que o usuário edite o texto da tabela
+                return false;
             }
         };
         resultadosTable = new JTable(tableModel);
-        resultadosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Permite selecionar apenas um por vez
+        resultadosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         JScrollPane scrollPane = new JScrollPane(resultadosTable);
         scrollPane.setBounds(10, 60, 510, 260);

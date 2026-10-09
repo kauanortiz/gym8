@@ -57,6 +57,8 @@ public class TreinosController {
 	}
 	
 	public void cadastrar() {
+		Usuario usrLogado = SessaoUsuario.getUsuarioLogado();
+		
 		String nome = view.getNomeTreinoField().getText();
 		Integer repsMin = ((Number)view.getRepsMinSpinner().getValue()).intValue();
 		Integer repsMax = ((Number)view.getRepsMaxSpinner().getValue()).intValue();
@@ -84,8 +86,16 @@ public class TreinosController {
     	    return;
 		}
 		
+		if(usrLogado.temTreinoNoDia(dia)) {
+			JOptionPane.showMessageDialog(view, "Já existe um treino para este dia!");
+		    return;
+		}
+		
 		Exercicio exercicio = new Exercicio(nome, repsMin, repsMax, series, grupoMuscular);
 		this.treinoAtual.adicionar(exercicio);
+		if(!treinoAtual.getGruposMusculares().contains(grupoMuscular)) {
+			this.treinoAtual.adicionarGrupoMuscular(grupoMuscular);
+		}
 		
 		view.getNomeTreinoField().setText("");
 	    view.getGrupoComboBox().setSelectedIndex(-1);

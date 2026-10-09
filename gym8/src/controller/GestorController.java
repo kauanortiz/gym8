@@ -89,8 +89,8 @@ public class GestorController {
         		}
         	}
     	    
-    	    if(senha.length() <= 8){
-        	    JOptionPane.showMessageDialog(view, "A senha deve ter mais de 8 caracteres!");
+    	    if(senha.length() < 8){
+        	    JOptionPane.showMessageDialog(view, "A senha deve ter pelo menos 8 caracteres!");
         	    return;
         	}
     	    
@@ -279,8 +279,8 @@ public class GestorController {
     		}
     	}
     	
-    	if(senha.length() <= 8){
-    	    JOptionPane.showMessageDialog(view, "A senha deve ter mais de 8 caracteres!");
+    	if(senha.length() < 8){
+    	    JOptionPane.showMessageDialog(view, "A senha deve ter pelo menos 8 caracteres!");
     	    return;
     	}
     	
