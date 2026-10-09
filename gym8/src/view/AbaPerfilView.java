@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextArea;
 
 public class AbaPerfilView extends JPanel {
 
@@ -24,6 +25,11 @@ public class AbaPerfilView extends JPanel {
     
     private JButton btnAceitarConvite;
     private JButton btnRecusarConvite;
+    
+    //treinos
+    private JTextArea detalhesTreinoTextArea;
+    private JButton btnRemoverTreino;
+    private JButton btnAlterarTreino;
 
     public AbaPerfilView() {
         setLayout(null);
@@ -52,6 +58,9 @@ public class AbaPerfilView extends JPanel {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(10, 100, 520, 250);
         add(tabbedPane);
+        
+        JPanel panelTreinos = new JPanel();
+        panelTreinos.setLayout(null);
 
         modeloTreinos = new DefaultTableModel(new Object[]{"Grupos musculares", "Dia", "Qtd. Exercícios"}, 0) {
 	        @Override
@@ -60,7 +69,29 @@ public class AbaPerfilView extends JPanel {
 	        }
         };
         tabelaTreinos = new JTable(modeloTreinos);
-        tabbedPane.addTab("Meus Treinos", new JScrollPane(tabelaTreinos));
+        JScrollPane scrollTreinos = new JScrollPane(tabelaTreinos);
+        scrollTreinos.setBounds(0, 0, 515, 120);
+        panelTreinos.add(scrollTreinos);
+
+        JLabel lblDetalhes = new JLabel("Detalhes do Treino Selecionado:");
+        lblDetalhes.setBounds(10, 125, 200, 15);
+        panelTreinos.add(lblDetalhes);
+
+        detalhesTreinoTextArea = new JTextArea();
+        detalhesTreinoTextArea.setEditable(false);
+        JScrollPane scrollDetalhes = new JScrollPane(detalhesTreinoTextArea);
+        scrollDetalhes.setBounds(10, 145, 340, 70);
+        panelTreinos.add(scrollDetalhes);
+
+        btnRemoverTreino = new JButton("Remover");
+        btnRemoverTreino.setBounds(360, 145, 140, 25);
+        panelTreinos.add(btnRemoverTreino);
+
+        btnAlterarTreino = new JButton("Alterar (Aba Treinos)");
+        btnAlterarTreino.setBounds(360, 180, 140, 25);
+        panelTreinos.add(btnAlterarTreino);
+
+        tabbedPane.addTab("Meus Treinos", panelTreinos);
 
         modeloDietas = new DefaultTableModel(new Object[]{"Refeição", "Qtd. Alimentos"}, 0) {
 	        @Override
@@ -126,5 +157,21 @@ public class AbaPerfilView extends JPanel {
     
     public JButton getBtnRecusarConvite() {
     	return btnRecusarConvite;
+    }
+    
+    public JTable getTabelaTreinos() {
+    	return tabelaTreinos;
+    }
+    
+    public JTextArea getDetalhesTreinoTextArea() {
+    	return detalhesTreinoTextArea;
+    }
+    
+    public JButton getBtnRemoverTreino() {
+    	return btnRemoverTreino;
+    }
+    
+    public JButton getBtnAlterarTreino() {
+    	return btnAlterarTreino;
     }
 }

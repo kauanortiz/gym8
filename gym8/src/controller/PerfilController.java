@@ -12,6 +12,10 @@ import model.enums.GrupoMuscular;
 import model.treinamento.Convite;
 import session.SessaoUsuario;
 import view.AbaPerfilView;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import model.treinamento.Exercicio;
+import view.AlterarTreinoDialog;
 
 public class PerfilController {
 
@@ -90,5 +94,79 @@ public class PerfilController {
                 carregarDadosDoPerfil();
             }
         });
+        
+        view.getTabelaTreinos().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    mostrarDetalhesDoTreino();
+                }
+            }
+        });
+
+        view.getBtnRemoverTreino().addActionListener(e -> {
+            int linha = view.getTabelaTreinos().getSelectedRow();
+            
+            if(linha != -1) {
+                int confirm = JOptionPane.showConfirmDialog(view, "Deseja realmente excluir este treino?", "Excluir Treino", JOptionPane.YES_NO_OPTION);
+                
+                if(confirm == JOptionPane.YES_OPTION) {
+                    Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
+                    usuarioLogado.getTreinos().remove(linha);
+                    
+                    JOptionPane.showMessageDialog(view, "Treino removido com sucesso!");
+                    carregarDadosDoPerfil();
+                    view.getDetalhesTreinoTextArea().setText("");
+                }
+            }else{
+                JOptionPane.showMessageDialog(view, "Selecione um treino na tabela para remover.");
+            }
+        });
+
+        view.getBtnAlterarTreino().addActionListener(e -> {
+            int linhaSelecionada = view.getTabelaTreinos().getSelectedRow();
+            
+            if(linhaSelecionada != -1) {
+                Usuario usuario = SessaoUsuario.getUsuarioLogado();
+                Treino treinoSelecionado = usuario.getTreinos().get(linhaSelecionada);
+                
+                AlterarTreinoDialog popupDialog = new AlterarTreinoDialog(treinoSelecionado);
+                popupDialog.setVisible(true);
+                
+                if(popupDialog.isDadosForamSalvos()) {
+                    JOptionPane.showMessageDialog(view, "Treino atualizado com sucesso!");
+                    
+                    carregarDadosDoPerfil();
+                    mostrarDetalhesDoTreino(); 
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(view, "Selecione um treino na tabela para alterar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+    }
+    
+    private void mostrarDetalhesDoTreino() {
+        int linhaSelecionada = view.getTabelaTreinos().getSelectedRow();
+        
+        if(linhaSelecionada != -1) {
+            Usuario usuario = SessaoUsuario.getUsuarioLogado();
+            
+            Treino treino = usuario.getTreinos().get(linhaSelecionada);
+            
+            StringBuilder texto = new StringBuilder();
+            texto.append("----------------------------\n");
+            texto.append("EXERCÍCIOS:\n");
+            
+            if(treino.getExercicios() != null) {
+                for(Exercicio ex : treino.getExercicios()) {
+                    texto.append(" - ").append(ex.getNome())
+                         .append(" (").append(ex.getRepsMinimas()).append(" a ").append(ex.getRepsMaximas()).append(" reps)\n");
+                }
+            }
+            
+            view.getDetalhesTreinoTextArea().setText(texto.toString());
+            view.getDetalhesTreinoTextArea().setCaretPosition(0);
+        }
     }
 }
