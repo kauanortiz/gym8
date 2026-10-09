@@ -35,6 +35,10 @@ public class AbaPerfilView extends JPanel {
     private JTextArea detalhesDietaTextArea;
 	private JButton btnRemoverDieta;
 	private JButton btnAlterarDieta;
+	
+	//convites
+	private DefaultTableModel modeloDetalhesRemetente;
+	private JTable tabelaDetalhesRemetente;
 
     public AbaPerfilView() {
         setLayout(null);
@@ -92,7 +96,7 @@ public class AbaPerfilView extends JPanel {
         btnRemoverTreino.setBounds(360, 145, 140, 25);
         panelTreinos.add(btnRemoverTreino);
 
-        btnAlterarTreino = new JButton("Alterar (Aba Treinos)");
+        btnAlterarTreino = new JButton("Alterar Treino");
         btnAlterarTreino.setBounds(360, 180, 140, 25);
         panelTreinos.add(btnAlterarTreino);
 
@@ -101,7 +105,6 @@ public class AbaPerfilView extends JPanel {
         JPanel panelDietas = new JPanel();
         panelDietas.setLayout(null);
 
-        // Tabela de Refeições
         modeloDietas = new DefaultTableModel(new Object[]{"Refeição", "Qtd. Alimentos"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) { return false; }
@@ -111,7 +114,6 @@ public class AbaPerfilView extends JPanel {
         scrollDietas.setBounds(0, 0, 515, 120);
         panelDietas.add(scrollDietas);
 
-        // Área de Detalhes
         JLabel lblDetalhesDieta = new JLabel("Detalhes da Refeição Selecionada:");
         lblDetalhesDieta.setBounds(10, 125, 250, 15);
         panelDietas.add(lblDetalhesDieta);
@@ -122,7 +124,6 @@ public class AbaPerfilView extends JPanel {
         scrollDetalhesDieta.setBounds(10, 145, 340, 70);
         panelDietas.add(scrollDetalhesDieta);
 
-        // Botões
         btnRemoverDieta = new JButton("Remover Refeição");
         btnRemoverDieta.setBounds(360, 145, 140, 25);
         panelDietas.add(btnRemoverDieta);
@@ -131,28 +132,36 @@ public class AbaPerfilView extends JPanel {
         btnAlterarDieta.setBounds(360, 180, 140, 25);
         panelDietas.add(btnAlterarDieta);
 
-        // Adiciona tudo na Aba do Perfil
         tabbedPane.addTab("Minha Dieta", panelDietas);
         JPanel panelConvites = new JPanel();
         panelConvites.setLayout(null);
-        
+
         modeloConvites = new DefaultTableModel(new Object[]{"Remetente", "Status"}, 0) {
-	        @Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
+            @Override public boolean isCellEditable(int row, int column) { return false; }
         };
         tabelaConvites = new JTable(modeloConvites);
         JScrollPane scrollConvites = new JScrollPane(tabelaConvites);
-        scrollConvites.setBounds(0, 0, 515, 180);
+        scrollConvites.setBounds(10, 10, 495, 100);
         panelConvites.add(scrollConvites);
-        
-        btnAceitarConvite = new JButton("Aceitar");
-        btnAceitarConvite.setBounds(10, 188, 100, 23);
+
+        JLabel lblDetalhesConvite = new JLabel("Informações do Remetente:");
+        lblDetalhesConvite.setBounds(10, 120, 200, 15);
+        panelConvites.add(lblDetalhesConvite);
+
+        modeloDetalhesRemetente = new DefaultTableModel(new Object[]{"Atributo", "Valor"}, 0) {
+            @Override public boolean isCellEditable(int row, int column) { return false; }
+        };
+        tabelaDetalhesRemetente = new JTable(modeloDetalhesRemetente);
+        JScrollPane scrollDetalhesConvite = new JScrollPane(tabelaDetalhesRemetente);
+        scrollDetalhesConvite.setBounds(10, 140, 300, 75);
+        panelConvites.add(scrollDetalhesConvite);
+
+        btnAceitarConvite = new JButton("Aceitar Convite");
+        btnAceitarConvite.setBounds(330, 140, 150, 30);
         panelConvites.add(btnAceitarConvite);
-        
-        btnRecusarConvite = new JButton("Recusar");
-        btnRecusarConvite.setBounds(120, 188, 100, 23);
+
+        btnRecusarConvite = new JButton("Recusar Convite");
+        btnRecusarConvite.setBounds(330, 185, 150, 30);
         panelConvites.add(btnRecusarConvite);
 
         tabbedPane.addTab("Convites Recebidos", panelConvites);
@@ -220,5 +229,13 @@ public class AbaPerfilView extends JPanel {
 
 	public JButton getBtnAlterarDieta() {
 		return btnAlterarDieta;
+	}
+
+	public DefaultTableModel getModeloDetalhesRemetente() {
+		return modeloDetalhesRemetente;
+	}
+
+	public JTable getTabelaDetalhesRemetente() {
+		return tabelaDetalhesRemetente;
 	}
 }

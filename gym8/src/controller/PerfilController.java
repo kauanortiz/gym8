@@ -10,6 +10,7 @@ import model.Treino;
 import model.alimentos.Alimento;
 import model.alimentos.Refeicao;
 import model.enums.GrupoMuscular;
+import model.enums.Status;
 import model.treinamento.Convite;
 import session.SessaoUsuario;
 import view.AbaDietaView;
@@ -18,6 +19,8 @@ import view.AlterarRefeicaoDialog;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 import model.treinamento.Exercicio;
 import view.AlterarTreinoDialog;
 
@@ -67,31 +70,53 @@ public class PerfilController {
         view.getModeloConvites().setRowCount(0);
         if(usuarioLogado.getConvitesRecebidos() != null) {
             for(Convite c : usuarioLogado.getConvitesRecebidos()) {
+            	String textoStatus = (c.getStatus() != null) ? c.getStatus().getDescricao() : "PENDENTE";
+            	
                 view.getModeloConvites().addRow(new Object[]{
                     c.getRemetente().getNome(),
-                    c.getStatus().toString()
+                    textoStatus
                 });
             }
         }
     }
 
     private void iniciarControladoresDeNavegacao() {
-        view.getBtnAceitarConvite().addActionListener(e -> {
-            int linha = view.getTabelaConvites().getSelectedRow();
-            if(linha != -1) {
-                Usuario usuario = SessaoUsuario.getUsuarioLogado();
-                Convite conviteSelecionado = usuario.getConvitesRecebidos().get(linha);
-                
-                // Crie o método aceitar() na sua classe Convite se não existir
-                // conviteSelecionado.aceitar(); 
-                
-                JOptionPane.showMessageDialog(view, "Convite aceito!");
-                carregarDadosDoPerfil();
-            }else{
-                JOptionPane.showMessageDialog(view, "Selecione um convite primeiro.");
-            }
-        });
-        
+    	view.getTabelaConvites().getSelectionModel().addListSelectionListener(e -> {
+    	    if (!e.getValueIsAdjusting()) {
+    	        mostrarDetalhesDoRemetente();
+    	    }
+    	});
+
+    	view.getBtnAceitarConvite().addActionListener(e -> {
+    	    int linha = view.getTabelaConvites().getSelectedRow();
+    	    if(linha != -1) {
+    	        Usuario usuario = SessaoUsuario.getUsuarioLogado();
+    	        Convite convite = usuario.getConvitesRecebidos().get(linha);
+    	        
+    	        convite.setStatus(Status.ACEITO);
+    	        
+    	        JOptionPane.showMessageDialog(view, "Convite aceito!");
+    	        carregarDadosDoPerfil();
+    	        view.getModeloDetalhesRemetente().setRowCount(0);
+    	    }else {
+    	        JOptionPane.showMessageDialog(view, "Selecione um convite primeiro.");
+    	    }
+    	});
+
+    	view.getBtnRecusarConvite().addActionListener(e -> {
+    	    int linha = view.getTabelaConvites().getSelectedRow();
+    	    if(linha != -1) {
+    	        Usuario usuario = SessaoUsuario.getUsuarioLogado();
+    	        usuario.getConvitesRecebidos().remove(linha);
+    	        
+    	        JOptionPane.showMessageDialog(view, "Convite recusado.");
+    	        carregarDadosDoPerfil();
+    	        view.getModeloDetalhesRemetente().setRowCount(0);
+    	    }else {
+    	        JOptionPane.showMessageDialog(view, "Selecione um convite primeiro.");
+    	    }
+    	});
+    	
         view.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
@@ -219,6 +244,31 @@ public class PerfilController {
             
             view.getDetalhesTreinoTextArea().setText(texto.toString());
             view.getDetalhesTreinoTextArea().setCaretPosition(0);
+        }
+    }
+    
+    private void mostrarDetalhesDoRemetente() {
+        int linhaSelecionada = view.getTabelaConvites().getSelectedRow();
+        
+        DefaultTableModel modeloDetalhes = view.getModeloDetalhesRemetente();
+        modeloDetalhes.setRowCount(0);
+        
+        if (linhaSelecionada != -1) {
+            Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
+            
+            Convite convite = usuarioLogado.getConvitesRecebidos().get(linhaSelecionada);
+            Usuario remetente = convite.getRemetente();
+            
+            modeloDetalhes.addRow(new Object[]{"Nome", remetente.getNome()});
+            modeloDetalhes.addRow(new Object[]{"Idade", remetente.getIdade() + " anos"});
+            
+            if(remetente.getSexo() != null) {
+                modeloDetalhes.addRow(new Object[]{"Sexo", remetente.getSexo().toString()});
+            }
+            if(remetente.getClassificacao() != null) {
+                modeloDetalhes.addRow(new Object[]{"Classificação", remetente.getClassificacao().toString()});
+            }
+
         }
     }
 }

@@ -61,4 +61,12 @@ public class Convite {
 				" | Data: " + dataHorario.toString() + 
 				" | Status: " + status);
 	}
+	
+	public void aceitar() {
+		this.status = Status.ACEITO;
+	}
+	
+	public void recusar() {
+		this.status = Status.RECUSADO;
+	}
 }

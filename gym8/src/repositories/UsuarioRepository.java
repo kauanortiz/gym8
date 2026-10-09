@@ -72,8 +72,7 @@ public class UsuarioRepository {
 		}
 	}
 	
-	public void consultar(String cpf, Usuario usr) {
-		
+	public void consultar(String cpf, Usuario usr) {	
 		//bloco de informações básicas
 		if(usuarios.containsKey(cpf)) {
 			usr.gerarResumo();
@@ -152,8 +151,7 @@ public class UsuarioRepository {
 	    return null;
 	}
 	
-	public List<Usuario> buscarParceirosProximos(Usuario usuarioBuscador, double raioMax){
-		
+	public List<Usuario> buscarParceirosProximos(Usuario usuarioBuscador, double raioMax){		
 		//.values() pega os usuários e ignora as chaves do map
 		return this.usuarios.values().stream().filter(u -> !u.getCpf().equals(usuarioBuscador.getCpf()))
 				
@@ -264,7 +262,7 @@ public class UsuarioRepository {
 		this.usuarios = usuarios;
 	}
 	
-	/*public void gerenciarConvites(Usuario usuario) {
+	/*public void aceitarConvite(Usuario usuario) {
 		for(Convite c : usuario.getConvitesRecebidos()) {
 			System.out.println("Remetente: " + c.getRemetente().getNome());
 			System.out.println("Idade: " + c.getRemetente().getIdade());
