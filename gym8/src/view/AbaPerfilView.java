@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 
 public class AbaPerfilView extends JPanel {
 
+    private static final long serialVersionUID = 1L;
     private JLabel lblNomeValor;
     private JLabel lblIdadeValor;
     
@@ -33,71 +34,83 @@ public class AbaPerfilView extends JPanel {
     
     //dietas
     private JTextArea detalhesDietaTextArea;
-	private JButton btnRemoverDieta;
-	private JButton btnAlterarDieta;
-	
-	//convites
-	private DefaultTableModel modeloDetalhesRemetente;
-	private JTable tabelaDetalhesRemetente;
+    private JButton btnRemoverDieta;
+    private JButton btnAlterarDieta;
+    
+    //convites
+    private DefaultTableModel modeloDetalhesRemetente;
+    private JTable tabelaDetalhesRemetente;
 
     public AbaPerfilView() {
         setLayout(null);
-
+        
         JLabel lblTitulo = new JLabel("Meu Perfil");
-        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblTitulo.setBounds(10, 11, 150, 20);
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblTitulo.setBounds(20, 15, 150, 30);
         add(lblTitulo);
 
         JLabel lblNome = new JLabel("Nome:");
-        lblNome.setBounds(10, 42, 46, 14);
+        lblNome.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblNome.setBounds(20, 60, 50, 20);
         add(lblNome);
 
         lblNomeValor = new JLabel("-");
-        lblNomeValor.setBounds(60, 42, 250, 14);
+        lblNomeValor.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        lblNomeValor.setBounds(70, 60, 250, 20);
         add(lblNomeValor);
 
         JLabel lblIdade = new JLabel("Idade:");
-        lblIdade.setBounds(10, 67, 46, 14);
+        lblIdade.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblIdade.setBounds(20, 85, 50, 20);
         add(lblIdade);
 
         lblIdadeValor = new JLabel("-");
-        lblIdadeValor.setBounds(60, 67, 100, 14);
+        lblIdadeValor.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        lblIdadeValor.setBounds(70, 85, 100, 20);
         add(lblIdadeValor);
-
+        
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(10, 100, 520, 250);
+        tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tabbedPane.setBounds(20, 125, 510, 255);
         add(tabbedPane);
         
         JPanel panelTreinos = new JPanel();
         panelTreinos.setLayout(null);
 
         modeloTreinos = new DefaultTableModel(new Object[]{"Grupos musculares", "Dia", "Qtd. Exercícios"}, 0) {
-	        @Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
+            private static final long serialVersionUID = 1L;
+            @Override
+            public boolean isCellEditable(int row, int column) { return false; }
         };
         tabelaTreinos = new JTable(modeloTreinos);
+        tabelaTreinos.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tabelaTreinos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        
         JScrollPane scrollTreinos = new JScrollPane(tabelaTreinos);
-        scrollTreinos.setBounds(0, 0, 515, 120);
+        scrollTreinos.setBounds(10, 10, 485, 100);
         panelTreinos.add(scrollTreinos);
 
         JLabel lblDetalhes = new JLabel("Detalhes do Treino Selecionado:");
-        lblDetalhes.setBounds(10, 125, 200, 15);
+        lblDetalhes.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        lblDetalhes.setBounds(10, 120, 250, 20);
         panelTreinos.add(lblDetalhes);
 
         detalhesTreinoTextArea = new JTextArea();
         detalhesTreinoTextArea.setEditable(false);
+        detalhesTreinoTextArea.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        
         JScrollPane scrollDetalhes = new JScrollPane(detalhesTreinoTextArea);
-        scrollDetalhes.setBounds(10, 145, 340, 70);
+        scrollDetalhes.setBounds(10, 145, 320, 70);
         panelTreinos.add(scrollDetalhes);
 
         btnRemoverTreino = new JButton("Remover");
-        btnRemoverTreino.setBounds(360, 145, 140, 25);
+        btnRemoverTreino.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        btnRemoverTreino.setBounds(345, 145, 150, 30);
         panelTreinos.add(btnRemoverTreino);
 
         btnAlterarTreino = new JButton("Alterar Treino");
-        btnAlterarTreino.setBounds(360, 180, 140, 25);
+        btnAlterarTreino.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        btnAlterarTreino.setBounds(345, 185, 150, 30);
         panelTreinos.add(btnAlterarTreino);
 
         tabbedPane.addTab("Meus Treinos", panelTreinos);
@@ -106,62 +119,83 @@ public class AbaPerfilView extends JPanel {
         panelDietas.setLayout(null);
 
         modeloDietas = new DefaultTableModel(new Object[]{"Refeição", "Qtd. Alimentos"}, 0) {
+            private static final long serialVersionUID = 1L;
             @Override
             public boolean isCellEditable(int row, int column) { return false; }
         };
         tabelaDietas = new JTable(modeloDietas);
+        tabelaDietas.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tabelaDietas.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        
         JScrollPane scrollDietas = new JScrollPane(tabelaDietas);
-        scrollDietas.setBounds(0, 0, 515, 120);
+        scrollDietas.setBounds(10, 10, 485, 100);
         panelDietas.add(scrollDietas);
 
         JLabel lblDetalhesDieta = new JLabel("Detalhes da Refeição Selecionada:");
-        lblDetalhesDieta.setBounds(10, 125, 250, 15);
+        lblDetalhesDieta.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        lblDetalhesDieta.setBounds(10, 120, 250, 20);
         panelDietas.add(lblDetalhesDieta);
 
         detalhesDietaTextArea = new JTextArea();
         detalhesDietaTextArea.setEditable(false);
+        detalhesDietaTextArea.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        
         JScrollPane scrollDetalhesDieta = new JScrollPane(detalhesDietaTextArea);
-        scrollDetalhesDieta.setBounds(10, 145, 340, 70);
+        scrollDetalhesDieta.setBounds(10, 145, 320, 70);
         panelDietas.add(scrollDetalhesDieta);
 
         btnRemoverDieta = new JButton("Remover Refeição");
-        btnRemoverDieta.setBounds(360, 145, 140, 25);
+        btnRemoverDieta.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        btnRemoverDieta.setBounds(345, 145, 150, 30);
         panelDietas.add(btnRemoverDieta);
 
         btnAlterarDieta = new JButton("Alterar Refeição");
-        btnAlterarDieta.setBounds(360, 180, 140, 25);
+        btnAlterarDieta.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        btnAlterarDieta.setBounds(345, 185, 150, 30);
         panelDietas.add(btnAlterarDieta);
 
         tabbedPane.addTab("Minha Dieta", panelDietas);
+        
         JPanel panelConvites = new JPanel();
         panelConvites.setLayout(null);
 
         modeloConvites = new DefaultTableModel(new Object[]{"Remetente", "Status"}, 0) {
+            private static final long serialVersionUID = 1L;
             @Override public boolean isCellEditable(int row, int column) { return false; }
         };
         tabelaConvites = new JTable(modeloConvites);
+        tabelaConvites.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tabelaConvites.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        
         JScrollPane scrollConvites = new JScrollPane(tabelaConvites);
-        scrollConvites.setBounds(10, 10, 495, 100);
+        scrollConvites.setBounds(10, 10, 485, 100);
         panelConvites.add(scrollConvites);
 
         JLabel lblDetalhesConvite = new JLabel("Informações do Remetente:");
-        lblDetalhesConvite.setBounds(10, 120, 200, 15);
+        lblDetalhesConvite.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        lblDetalhesConvite.setBounds(10, 120, 200, 20);
         panelConvites.add(lblDetalhesConvite);
 
         modeloDetalhesRemetente = new DefaultTableModel(new Object[]{"Atributo", "Valor"}, 0) {
+            private static final long serialVersionUID = 1L;
             @Override public boolean isCellEditable(int row, int column) { return false; }
         };
         tabelaDetalhesRemetente = new JTable(modeloDetalhesRemetente);
+        tabelaDetalhesRemetente.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tabelaDetalhesRemetente.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        
         JScrollPane scrollDetalhesConvite = new JScrollPane(tabelaDetalhesRemetente);
-        scrollDetalhesConvite.setBounds(10, 140, 300, 75);
+        scrollDetalhesConvite.setBounds(10, 145, 320, 70);
         panelConvites.add(scrollDetalhesConvite);
 
         btnAceitarConvite = new JButton("Aceitar Convite");
-        btnAceitarConvite.setBounds(330, 140, 150, 30);
+        btnAceitarConvite.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        btnAceitarConvite.setBounds(345, 145, 150, 30);
         panelConvites.add(btnAceitarConvite);
 
         btnRecusarConvite = new JButton("Recusar Convite");
-        btnRecusarConvite.setBounds(330, 185, 150, 30);
+        btnRecusarConvite.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        btnRecusarConvite.setBounds(345, 185, 150, 30);
         panelConvites.add(btnRecusarConvite);
 
         tabbedPane.addTab("Convites Recebidos", panelConvites);
@@ -214,28 +248,28 @@ public class AbaPerfilView extends JPanel {
     public JButton getBtnAlterarTreino() {
     	return btnAlterarTreino;
     }
-
-	public JTable getTabelaDietas() {
-		return tabelaDietas;
-	}
-
-	public JTextArea getDetalhesDietaTextArea() {
-		return detalhesDietaTextArea;
-	}
-
-	public JButton getBtnRemoverDieta() {
-		return btnRemoverDieta;
-	}
-
-	public JButton getBtnAlterarDieta() {
-		return btnAlterarDieta;
-	}
-
-	public DefaultTableModel getModeloDetalhesRemetente() {
-		return modeloDetalhesRemetente;
-	}
-
-	public JTable getTabelaDetalhesRemetente() {
-		return tabelaDetalhesRemetente;
-	}
+    
+    public JTable getTabelaDietas() {
+    	return tabelaDietas;
+    }
+    
+    public JTextArea getDetalhesDietaTextArea() {
+    	return detalhesDietaTextArea;
+    }
+    
+    public JButton getBtnRemoverDieta() {
+    	return btnRemoverDieta;
+    }
+    
+    public JButton getBtnAlterarDieta() {
+    	return btnAlterarDieta;
+    }
+    
+    public DefaultTableModel getModeloDetalhesRemetente() {
+    	return modeloDetalhesRemetente;
+    }
+    
+    public JTable getTabelaDetalhesRemetente() {
+    	return tabelaDetalhesRemetente;
+    }
 }

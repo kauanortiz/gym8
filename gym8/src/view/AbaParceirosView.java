@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import model.enums.Sexo;
 
 public class AbaParceirosView extends JPanel {
 
+    private static final long serialVersionUID = 1L;
     private JComboBox<Classificacao> classificacaoCombo;
     private JComboBox<Sexo> sexoCombo;
     private JButton buscarButton;
@@ -24,67 +27,81 @@ public class AbaParceirosView extends JPanel {
     public AbaParceirosView() {
         setLayout(null);
 
+        Font fonteLabel = new Font("Segoe UI", Font.PLAIN, 14);
+        Font fonteCampo = new Font("Segoe UI", Font.PLAIN, 14);
+        
         JLabel lblClassificacao = new JLabel("Classificação:");
-        lblClassificacao.setBounds(10, 15, 90, 20);
+        lblClassificacao.setFont(fonteLabel);
+        lblClassificacao.setBounds(20, 20, 90, 30);
         add(lblClassificacao);
 
         classificacaoCombo = new JComboBox<>(Classificacao.values());
-        classificacaoCombo.setBounds(100, 15, 120, 20);
+        classificacaoCombo.setFont(fonteCampo);
+        classificacaoCombo.setBounds(110, 20, 120, 30);
         classificacaoCombo.setSelectedIndex(-1); 
         add(classificacaoCombo);
 
         JLabel lblSexo = new JLabel("Sexo:");
-        lblSexo.setBounds(230, 15, 50, 20);
+        lblSexo.setFont(fonteLabel);
+        lblSexo.setBounds(240, 20, 40, 30);
         add(lblSexo);
 
         sexoCombo = new JComboBox<>(Sexo.values());
-        sexoCombo.setBounds(270, 15, 100, 20);
+        sexoCombo.setFont(fonteCampo);
+        sexoCombo.setBounds(280, 20, 100, 30);
         sexoCombo.setSelectedIndex(-1);
         add(sexoCombo);
 
         buscarButton = new JButton("Buscar Parceiros");
-        buscarButton.setBounds(380, 15, 140, 20);
+        buscarButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        buscarButton.setBounds(390, 20, 140, 30);
         add(buscarButton);
-
+        
         tableModel = new DefaultTableModel(new Object[]{"Nome", "Distância (km)", "Classificação"}, 0) {
+            private static final long serialVersionUID = 1L;
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
+        
         resultadosTable = new JTable(tableModel);
+        resultadosTable.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        resultadosTable.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
         resultadosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         JScrollPane scrollPane = new JScrollPane(resultadosTable);
-        scrollPane.setBounds(10, 60, 510, 260);
+        scrollPane.setBounds(20, 70, 510, 250);
         add(scrollPane);
         
         enviarConviteButton = new JButton("Enviar Convite de Treino");
-        enviarConviteButton.setBounds(160, 330, 200, 30);
+        enviarConviteButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        enviarConviteButton.setBounds(165, 340, 220, 35);
         add(enviarConviteButton);
     }
 
+    
     public JComboBox<Classificacao> getClassificacaoCombo() {
-    	return classificacaoCombo;
+        return classificacaoCombo;
     }
     
     public JComboBox<Sexo> getSexoCombo() {
-    	return sexoCombo;
+        return sexoCombo;
     }
     
     public JButton getBuscarButton() {
-    	return buscarButton;
+        return buscarButton;
     }
     
     public JButton getEnviarConviteButton() {
-    	return enviarConviteButton;
+        return enviarConviteButton;
     }
     
     public DefaultTableModel getTableModel() {
-    	return tableModel;
+        return tableModel;
     }
     
     public JTable getResultadosTable() {
-    	return resultadosTable;
+        return resultadosTable;
     }
 }

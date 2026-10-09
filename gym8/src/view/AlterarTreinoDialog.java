@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -87,6 +88,8 @@ public class AlterarTreinoDialog extends JDialog {
                 dialogEx.setVisible(true);
                 
                 if(dialogEx.isSalvo()) {
+                    
+                    listaExercicios.sort(Comparator.comparing(Exercicio::getNome));        
                     atualizarTabela();
                 }
             }else{

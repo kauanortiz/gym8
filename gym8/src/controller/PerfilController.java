@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
@@ -231,14 +232,14 @@ public class PerfilController {
             
             Treino treino = usuario.getTreinos().get(linhaSelecionada);
             
+            Function<Exercicio, String> formatadorExercicio = ex -> 
+            " - " + ex.getNome() + " (" + ex.getRepsMinimas() + " a " + ex.getRepsMaximas() + " reps)\n";
             StringBuilder texto = new StringBuilder();
-            texto.append("----------------------------\n");
             texto.append("EXERCÍCIOS:\n");
             
             if(treino.getExercicios() != null) {
                 for(Exercicio e : treino.getExercicios()) {
-                    texto.append(" - ").append(e.getNome())
-                         .append(" (").append(e.getRepsMinimas()).append(" a ").append(e.getRepsMaximas()).append(" reps)\n");
+                	texto.append(formatadorExercicio.apply(e));
                 }
             }
             

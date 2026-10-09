@@ -51,7 +51,9 @@ public class GestorController {
     	        
     	    }else{
     	        JOptionPane.showMessageDialog(view, "CPF não cadastrado ou senha incorreta!");
-    		}   		
+    		}
+    	    
+    	    view.getTelaLobby().getPainelDeAbas().setSelectedIndex(0);
     	});
     	
     	view.getTela1().getProximoButton().addActionListener(e -> {
@@ -218,13 +220,18 @@ public class GestorController {
         	cadastrar();       	
             finalizarCadastro();
             Usuario usrLogado = repository.autenticar(view.getTela1().getCpfField().getText(), new String(view.getTela1().getSenhaField().getPassword()));
-			SessaoUsuario.setUsuarioLogado(usrLogado);         
+			SessaoUsuario.setUsuarioLogado(usrLogado);
+			
+			view.getTelaLobby().getPainelDeAbas().setSelectedIndex(0);
         });
         
         view.getTelaLobby().getLogoutButton().addActionListener(e ->{
         	SessaoUsuario.limparSessao();
         	view.getTelaLogin().getCpfField().setText("");
         	view.getTelaLogin().getSenhaField().setText("");
+        	view.getTelaLobby().getAbaParceiros().getClassificacaoCombo().setSelectedIndex(-1);
+        	view.getTelaLobby().getAbaParceiros().getSexoCombo().setSelectedIndex(-1);
+        	view.getTelaLobby().getAbaParceiros().getTableModel().setRowCount(0);
         	view.mostrarEcra("LOGIN");
         });
     }

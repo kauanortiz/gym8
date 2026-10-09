@@ -51,7 +51,7 @@ public class Dieta {
 			System.out.println("Refeição " + i + ":");
 					
 			if(r.getAlimentos() != null && !r.getAlimentos().isEmpty()) {
-						r.listarAlimentos();	
+						r.gerarResumo();	
 			}
 			else {
 				System.out.println(" - Nenhum alimento cadastrado.");

@@ -1,19 +1,21 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JSpinner;
+import javax.swing.JComboBox;
 
 import model.enums.DiasDaSemana;
 import model.enums.GrupoMuscular;
 
-import javax.swing.JSpinner;
-import javax.swing.JComboBox;
-
 public class AbaTreinosView extends JPanel {
 
+    private static final long serialVersionUID = 1L;
     private JTextField nomeTreinoField;
     private JButton salvarTreinoButton;
     private JLabel repsMinLabel;
@@ -22,111 +24,126 @@ public class AbaTreinosView extends JPanel {
     private JSpinner repsMinSpinner;
     private JSpinner repsMaxSpinner;
     private JSpinner seriesSpinner;
-    private JComboBox diaComboBox;
-    private JComboBox grupoComboBox;
+    private JComboBox<DiasDaSemana> diaComboBox;
+    private JComboBox<GrupoMuscular> grupoComboBox;
 
     public AbaTreinosView() {
         setLayout(null);
-
+        
         JLabel exercicioLabel = new JLabel("Nome do exercício:");
-        exercicioLabel.setBounds(20, 31, 150, 25);
+        exercicioLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        exercicioLabel.setBounds(50, 30, 150, 30);
         add(exercicioLabel);
 
         nomeTreinoField = new JTextField();
-        nomeTreinoField.setBounds(156, 31, 203, 25);
+        nomeTreinoField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        nomeTreinoField.setBounds(200, 30, 230, 30);
         add(nomeTreinoField);
-
-        salvarTreinoButton = new JButton("Salvar Treino");
-        salvarTreinoButton.setBounds(308, 259, 134, 30);
-        add(salvarTreinoButton);
         
-        repsMinLabel = new JLabel("Repetições mínimas:");
-        repsMinLabel.setBounds(20, 67, 157, 14);
+        JLabel repsMinLabel = new JLabel("Repetições mínimas:");
+        repsMinLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        repsMinLabel.setBounds(50, 75, 150, 30);
         add(repsMinLabel);
         
         SpinnerNumberModel modeloSpinner1 = new SpinnerNumberModel(1, 1, 20, 1);
         repsMinSpinner = new JSpinner(modeloSpinner1);
-        repsMinSpinner.setBounds(156, 64, 44, 20);
+        repsMinSpinner.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        repsMinSpinner.setBounds(200, 75, 70, 30);
         add(repsMinSpinner);
         
         JLabel repsMaxLabel = new JLabel("Repetições máximas:");
-        repsMaxLabel.setBounds(20, 94, 157, 14);
+        repsMaxLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        repsMaxLabel.setBounds(50, 120, 150, 30);
         add(repsMaxLabel);
         
         SpinnerNumberModel modeloSpinner2 = new SpinnerNumberModel(1, 1, 20, 1);
         repsMaxSpinner = new JSpinner(modeloSpinner2);
-        repsMaxSpinner.setBounds(156, 91, 44, 20);
+        repsMaxSpinner.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        repsMaxSpinner.setBounds(200, 120, 70, 30);
         add(repsMaxSpinner);
         
         JLabel seriesLabel = new JLabel("Total de séries:");
-        seriesLabel.setBounds(20, 122, 150, 14);
+        seriesLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        seriesLabel.setBounds(50, 165, 150, 30);
         add(seriesLabel);
         
         SpinnerNumberModel modeloSpinner3 = new SpinnerNumberModel(1, 1, 20, 1);
         seriesSpinner = new JSpinner(modeloSpinner3);
-        seriesSpinner.setBounds(156, 119, 44, 20);
+        seriesSpinner.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        seriesSpinner.setBounds(200, 165, 70, 30);
         add(seriesSpinner);
         
         JLabel grupoMuscularLabel = new JLabel("Grupo muscular:");
-        grupoMuscularLabel.setBounds(20, 156, 94, 14);
+        grupoMuscularLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        grupoMuscularLabel.setBounds(50, 210, 150, 30);
         add(grupoMuscularLabel);
         
         grupoComboBox = new JComboBox<>(GrupoMuscular.values());
-        grupoComboBox.setBounds(156, 152, 150, 22);
+        grupoComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        grupoComboBox.setBounds(200, 210, 230, 30);
         add(grupoComboBox);
         grupoComboBox.setSelectedIndex(-1);
         
-        adicionarButton = new JButton("Adicionar exercício");
-        adicionarButton.setBounds(150, 259, 150, 30);
-        add(adicionarButton);
-        
-        limparButton = new JButton("Limpar campos");
-        limparButton.setBounds(10, 259, 134, 30);
-        add(limparButton);
-        
         JLabel diaLabel = new JLabel("Dia do treino:");
-        diaLabel.setBounds(20, 193, 80, 14);
+        diaLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        diaLabel.setBounds(50, 255, 150, 30);
         add(diaLabel);
         
         diaComboBox = new JComboBox<>(DiasDaSemana.values());
-        diaComboBox.setBounds(156, 189, 150, 22);
+        diaComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        diaComboBox.setBounds(200, 255, 230, 30);
         add(diaComboBox);
-        diaComboBox.setSelectedIndex(-1);
+        diaComboBox.setSelectedIndex(-1); 
+        
+        limparButton = new JButton("Limpar campos");
+        limparButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        limparButton.setBounds(30, 320, 130, 35);
+        add(limparButton);
+
+        adicionarButton = new JButton("Adicionar exercício");
+        adicionarButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        adicionarButton.setBounds(170, 320, 160, 35);
+        add(adicionarButton);
+
+        salvarTreinoButton = new JButton("Salvar Treino");
+        salvarTreinoButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        salvarTreinoButton.setBounds(340, 320, 130, 35);
+        add(salvarTreinoButton);
     }
 
     public JTextField getNomeTreinoField(){
-    	return nomeTreinoField;
+        return nomeTreinoField;
     }
     
     public JButton getSalvarTreinoButton(){
-    	return salvarTreinoButton;
+        return salvarTreinoButton;
     }
     
     public JButton getAdicionarButton(){
-    	return adicionarButton;
+        return adicionarButton;
     }
     
     public JButton getLimparButton(){
-    	return limparButton;
+        return limparButton;
     }
 
-	public JSpinner getRepsMinSpinner() {
-		return repsMinSpinner;
-	}
+    public JSpinner getRepsMinSpinner() {
+        return repsMinSpinner;
+    }
 
-	public JSpinner getRepsMaxSpinner() {
-		return repsMaxSpinner;
-	}
+    public JSpinner getRepsMaxSpinner() {
+        return repsMaxSpinner;
+    }
 
-	public JSpinner getSeriesSpinner() {
-		return seriesSpinner;
-	}
+    public JSpinner getSeriesSpinner() {
+        return seriesSpinner;
+    }
 
-	public JComboBox getDiaComboBox() {
-		return diaComboBox;
-	}
+    public JComboBox<DiasDaSemana> getDiaComboBox() {
+        return diaComboBox;
+    }
 
-	public JComboBox getGrupoComboBox() {
-		return grupoComboBox;
-	}
+    public JComboBox<GrupoMuscular> getGrupoComboBox() {
+        return grupoComboBox;
+    }
 }

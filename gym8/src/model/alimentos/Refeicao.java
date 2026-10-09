@@ -3,7 +3,9 @@ package model.alimentos;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Refeicao {
+import model.Descritivel;
+
+public class Refeicao implements Descritivel{
 
 	Set<Alimento> alimentos;
 	public double caloriasTotais;
@@ -57,7 +59,8 @@ public class Refeicao {
 		}
 	}
 	
-	public void listarAlimentos() {
+	@Override
+	public void gerarResumo() {
 		alimentos.forEach((Alimento) -> {
 			System.out.println(" - " + Alimento.getNome() + " | Quantidade: " + Alimento.getQuantidade() +
 					" | Calorias: " + Alimento.calcularCalorias(Alimento.getCalorias(), Alimento.getQuantidade()) + " kcal");

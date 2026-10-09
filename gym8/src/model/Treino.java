@@ -10,7 +10,7 @@ import model.enums.DiasDaSemana;
 import model.enums.GrupoMuscular;
 import model.treinamento.Exercicio;
 
-public class Treino {
+public class Treino implements Descritivel{
 
 	private Integer duracao;
 	private Set<Exercicio> exercicios = new HashSet<>();
@@ -103,6 +103,7 @@ public class Treino {
 		}
 	}
 	
+	@Override
 	public void gerarResumo() {
 		for(Exercicio e: exercicios) {
 			System.out.println(e.getNome() + "\n" + 

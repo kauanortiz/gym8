@@ -9,44 +9,28 @@ import model.enums.Objetivo;
 import model.enums.Sexo;
 import model.treinamento.Convite;
 
-public class Usuario {
+public class Usuario extends Pessoa{
 
-	private String nome;
-	private String cpf;
-	private Integer idade;
+	
 	private Classificacao classificacao;
 	private Objetivo objetivo;
-	private Sexo sexo;
+	
 	private List<Treino> treinos = new ArrayList<>();
 	private List<Convite> convitesRecebidos = new ArrayList<>();
 	private Dieta dieta;
-	private double latitude;
-	private double longitude;
+	
 	private String senha;
 	
 	
 	public Usuario(String nome, String cpf, Integer idade, Classificacao classificacao, Objetivo objetivo, Sexo sexo, double latitude, double longitude, String senha) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.idade = idade;
+		super(nome, cpf, idade, sexo, latitude, longitude);
 		this.classificacao = classificacao;
 		this.objetivo = objetivo;
-		this.sexo = sexo;
-		this.latitude = latitude;
-		this.longitude = longitude;
 		this.senha = senha;
 	}
 
 	public Usuario(String nome, String cpf) {
-		this.nome = nome;
-		this.cpf = cpf;
-	}
-	
-	//construtor para teste dos filtros de localização
-	public Usuario(String nome, double latitude, double longitude) {
-		this.nome = nome;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		super(nome, cpf);
 	}
 
 	public String getCpf() {
@@ -195,10 +179,9 @@ public class Usuario {
 		System.out.println("Treino não encontrado!\n");
 	}
 	
-	public void gerarResumo() {
-		System.out.println("Nome: " + getNome() + "\nCPF: " + getCpf());
-		System.out.println("Idade: " + getIdade() + "\nClassificação: " + getClassificacao());
-		System.out.println("Objetivo: " + getObjetivo());
+	@Override
+	public String gerarResumo() {
+		return "Nome: " + getNome() + "\nCPF: " + getCpf() + "\nIdade: " + getIdade() + "\nClassificação: " + getClassificacao() + "\nObjetivo: " + getObjetivo();
 	}
 	
 }

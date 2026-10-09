@@ -59,4 +59,8 @@ public class LobbyView extends JPanel {
 	public AbaPerfilView getAbaPerfil() {
 		return abaPerfil;
 	}
+	
+	public JTabbedPane getPainelDeAbas() {
+		return this.painelDeAbas;
+	}
 }

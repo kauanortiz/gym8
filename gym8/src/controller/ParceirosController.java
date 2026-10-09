@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.List;
+import java.util.function.Function;
+
 import javax.swing.JOptionPane;
 
 import app.GeolocalizacaoService;
@@ -47,6 +49,16 @@ public class ParceirosController {
         if(view.getSexoCombo().getSelectedIndex() != -1) {
             filtroSexo = (Sexo) view.getSexoCombo().getSelectedItem();
         }
+        
+        Function<Double, String> formatadorDistancia = d -> {
+            if(d < 1.0) {
+                return "Menos de 1 km (Muito perto!)";
+            }else if (d <= 5.0) {
+                return String.format("%.1f km (No seu bairro)", d);
+            }else {
+                return String.format("%.1f km", d);
+            }
+        };
 
         for(Usuario parceiro : resultados) {
             boolean match = true;
@@ -67,7 +79,7 @@ public class ParceirosController {
                 
                 view.getTableModel().addRow(new Object[]{
                     parceiro.getNome(),
-                    String.format("%.1f km", distancia),
+                    formatadorDistancia.apply(distancia),
                     parceiro.getClassificacao()
                 });
             }

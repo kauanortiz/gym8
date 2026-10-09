@@ -12,106 +12,106 @@ import javax.swing.JPasswordField;
 
 public class LoginView extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField cpfField;
-	private JButton cadastrarButton;
-	private JButton entrarButton;
-	private JPasswordField senhaField;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField cpfField;
+    private JButton cadastrarButton;
+    private JButton entrarButton;
+    private JPasswordField senhaField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginView frame = new LoginView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    LoginView frame = new LoginView();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public LoginView() {
-		setLayout(null);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-        JLabel tituloLabel = new JLabel("GYM8 ");
-        tituloLabel.setBounds(10, 11, 63, 33);
-        tituloLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 20));
+    /**
+     * Create the frame.
+     */
+    public LoginView() {
+        setLayout(null);
+        setBounds(100, 100, 450, 330);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        
+        JLabel tituloLabel = new JLabel("GYM8");
+        tituloLabel.setBounds(185, 15, 80, 33);
+        tituloLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         add(tituloLabel);
         
         JLabel cadastroLabel = new JLabel("Login");
-        cadastroLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 18));
-        cadastroLabel.setBounds(185, 52, 51, 24);
+        cadastroLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        cadastroLabel.setBounds(200, 50, 50, 24);
         add(cadastroLabel);
         
-        JLabel cpfLabell = new JLabel("CPF:");
-        cpfLabell.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        cpfLabell.setBounds(54, 85, 46, 24);
-        add(cpfLabell);
-        
-        JLabel senhaLabel = new JLabel("Senha:");
-        senhaLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        senhaLabel.setBounds(54, 135, 46, 27);
-        add(senhaLabel);
+        JLabel cpfLabel = new JLabel("CPF:");
+        cpfLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        cpfLabel.setBounds(70, 95, 46, 30);
+        add(cpfLabel);
         
         cpfField = new JTextField();
-        cpfField.setBounds(91, 84, 232, 20);
+        cpfField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        cpfField.setBounds(120, 95, 230, 30);
         add(cpfField);
         cpfField.setColumns(10);
         
+        JLabel senhaLabel = new JLabel("Senha:");
+        senhaLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        senhaLabel.setBounds(70, 145, 50, 30);
+        add(senhaLabel);
+        
+        senhaField = new JPasswordField();
+        senhaField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        senhaField.setBounds(120, 145, 230, 30);
+        add(senhaField);
+        
+        entrarButton = new JButton("Entrar");
+        entrarButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        entrarButton.setBounds(120, 195, 230, 35);
+        add(entrarButton);
+        
         JLabel textoLabel = new JLabel("Ainda não é cadastrado?");
-        textoLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        textoLabel.setBounds(54, 226, 169, 24);
+        textoLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        textoLabel.setBounds(70, 255, 150, 30);
         add(textoLabel);
         
         cadastrarButton = new JButton("Cadastrar");
-        cadastrarButton.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        cadastrarButton.setBounds(221, 217, 102, 33);
+        cadastrarButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        cadastrarButton.setBounds(230, 255, 120, 30);
         add(cadastrarButton);
-        
-        entrarButton = new JButton("Entrar");
-        entrarButton.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        entrarButton.setBounds(164, 166, 89, 33);
-        add(entrarButton);
-        
-        senhaField = new JPasswordField();
-        senhaField.setFont(new Font("Yu Gothic", Font.PLAIN, 14));
-        senhaField.setBounds(103, 135, 220, 20);
-        add(senhaField);
+    }
 
-	}
+    public JTextField getCpfField() {
+        return cpfField;
+    }
 
-	public JTextField getCpfField() {
-		return cpfField;
-	}
+    public void setCpfField(JTextField cpfField) {
+        this.cpfField = cpfField;
+    }
 
-	public void setCpfField(JTextField cpfField) {
-		this.cpfField = cpfField;
-	}
+    public JPasswordField getSenhaField() {
+        return senhaField;
+    }
 
-	public JPasswordField getSenhaField() {
-		return senhaField;
-	}
+    public void setSenhaField(JPasswordField senhaField) {
+        this.senhaField = senhaField;
+    }
 
-	public void setSenhaField(JPasswordField senhaField) {
-		this.senhaField = senhaField;
-	}
+    public JButton getCadastrarButton() {
+        return cadastrarButton;
+    }
 
-	public JButton getCadastrarButton() {
-		return cadastrarButton;
-	}
-
-	public JButton getEntrarButton() {
-		return entrarButton;
-	}
+    public JButton getEntrarButton() {
+        return entrarButton;
+    }
 }
