@@ -7,11 +7,15 @@ import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import model.Treino;
+import model.alimentos.Alimento;
 import model.alimentos.Refeicao;
 import model.enums.GrupoMuscular;
 import model.treinamento.Convite;
 import session.SessaoUsuario;
+import view.AbaDietaView;
 import view.AbaPerfilView;
+import view.AlterarRefeicaoDialog;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.treinamento.Exercicio;
@@ -144,6 +148,54 @@ public class PerfilController {
                 JOptionPane.showMessageDialog(view, "Selecione um treino na tabela para alterar.", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
         });
+        
+        view.getTabelaDietas().getSelectionModel().addListSelectionListener(e -> {
+            if(!e.getValueIsAdjusting()) {
+                int linha = view.getTabelaDietas().getSelectedRow();
+                if(linha != -1) {
+                    Usuario usuario = SessaoUsuario.getUsuarioLogado();
+                    Refeicao refeicao = usuario.getDieta().getRefeicoes().get(linha);
+                    
+                    StringBuilder texto = new StringBuilder();
+                    texto.append("Refeição ").append(linha + 1).append("\n");
+                    texto.append("----------------------------\n");
+                    
+                    for(Alimento al : refeicao.getAlimentos()) {
+                        texto.append(" - ").append(al.getNome()).append("\n");
+                    }
+                    view.getDetalhesDietaTextArea().setText(texto.toString());
+                }
+            }
+        });
+
+        view.getBtnRemoverDieta().addActionListener(e -> {
+            int linha = view.getTabelaDietas().getSelectedRow();
+            if(linha != -1) {
+                int confirm = JOptionPane.showConfirmDialog(view, "Deseja excluir esta refeição?", "Excluir", JOptionPane.YES_NO_OPTION);
+                if(confirm == JOptionPane.YES_OPTION) {
+                    Usuario usuarioLogado = SessaoUsuario.getUsuarioLogado();
+                    usuarioLogado.getDieta().getRefeicoes().remove(linha);
+                    JOptionPane.showMessageDialog(view, "Refeição removida!");
+                    carregarDadosDoPerfil();
+                    view.getDetalhesDietaTextArea().setText("");
+                }
+            }
+        });
+
+        view.getBtnAlterarDieta().addActionListener(e -> {
+            int linha = view.getTabelaDietas().getSelectedRow();
+            if(linha != -1) {
+                Usuario usuario = SessaoUsuario.getUsuarioLogado();
+                Refeicao refeicaoSelecionada = usuario.getDieta().getRefeicoes().get(linha);
+                
+                AlterarRefeicaoDialog popup = new AlterarRefeicaoDialog(refeicaoSelecionada);
+                popup.setVisible(true);
+                
+                if(popup.isSalvo()) {
+                    carregarDadosDoPerfil();
+                }
+            }
+        });
     }
     
     private void mostrarDetalhesDoTreino() {
@@ -159,9 +211,9 @@ public class PerfilController {
             texto.append("EXERCÍCIOS:\n");
             
             if(treino.getExercicios() != null) {
-                for(Exercicio ex : treino.getExercicios()) {
-                    texto.append(" - ").append(ex.getNome())
-                         .append(" (").append(ex.getRepsMinimas()).append(" a ").append(ex.getRepsMaximas()).append(" reps)\n");
+                for(Exercicio e : treino.getExercicios()) {
+                    texto.append(" - ").append(e.getNome())
+                         .append(" (").append(e.getRepsMinimas()).append(" a ").append(e.getRepsMaximas()).append(" reps)\n");
                 }
             }
             

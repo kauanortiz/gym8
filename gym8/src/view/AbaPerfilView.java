@@ -30,6 +30,11 @@ public class AbaPerfilView extends JPanel {
     private JTextArea detalhesTreinoTextArea;
     private JButton btnRemoverTreino;
     private JButton btnAlterarTreino;
+    
+    //dietas
+    private JTextArea detalhesDietaTextArea;
+	private JButton btnRemoverDieta;
+	private JButton btnAlterarDieta;
 
     public AbaPerfilView() {
         setLayout(null);
@@ -93,15 +98,41 @@ public class AbaPerfilView extends JPanel {
 
         tabbedPane.addTab("Meus Treinos", panelTreinos);
 
+        JPanel panelDietas = new JPanel();
+        panelDietas.setLayout(null);
+
+        // Tabela de Refeições
         modeloDietas = new DefaultTableModel(new Object[]{"Refeição", "Qtd. Alimentos"}, 0) {
-	        @Override
-	        public boolean isCellEditable(int row, int column) {
-	            return false;
-	        }
+            @Override
+            public boolean isCellEditable(int row, int column) { return false; }
         };
         tabelaDietas = new JTable(modeloDietas);
-        tabbedPane.addTab("Minha Dieta", new JScrollPane(tabelaDietas));
+        JScrollPane scrollDietas = new JScrollPane(tabelaDietas);
+        scrollDietas.setBounds(0, 0, 515, 120);
+        panelDietas.add(scrollDietas);
 
+        // Área de Detalhes
+        JLabel lblDetalhesDieta = new JLabel("Detalhes da Refeição Selecionada:");
+        lblDetalhesDieta.setBounds(10, 125, 250, 15);
+        panelDietas.add(lblDetalhesDieta);
+
+        detalhesDietaTextArea = new JTextArea();
+        detalhesDietaTextArea.setEditable(false);
+        JScrollPane scrollDetalhesDieta = new JScrollPane(detalhesDietaTextArea);
+        scrollDetalhesDieta.setBounds(10, 145, 340, 70);
+        panelDietas.add(scrollDetalhesDieta);
+
+        // Botões
+        btnRemoverDieta = new JButton("Remover Refeição");
+        btnRemoverDieta.setBounds(360, 145, 140, 25);
+        panelDietas.add(btnRemoverDieta);
+
+        btnAlterarDieta = new JButton("Alterar Refeição");
+        btnAlterarDieta.setBounds(360, 180, 140, 25);
+        panelDietas.add(btnAlterarDieta);
+
+        // Adiciona tudo na Aba do Perfil
+        tabbedPane.addTab("Minha Dieta", panelDietas);
         JPanel panelConvites = new JPanel();
         panelConvites.setLayout(null);
         
@@ -174,4 +205,20 @@ public class AbaPerfilView extends JPanel {
     public JButton getBtnAlterarTreino() {
     	return btnAlterarTreino;
     }
+
+	public JTable getTabelaDietas() {
+		return tabelaDietas;
+	}
+
+	public JTextArea getDetalhesDietaTextArea() {
+		return detalhesDietaTextArea;
+	}
+
+	public JButton getBtnRemoverDieta() {
+		return btnRemoverDieta;
+	}
+
+	public JButton getBtnAlterarDieta() {
+		return btnAlterarDieta;
+	}
 }
