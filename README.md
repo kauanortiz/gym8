@@ -63,12 +63,12 @@ As ações e regras de negócio dinâmicas do sistema incluem:
 **Passo a passo:**
 
 1. Clone este repositório para a sua máquina local:
+
    ```bash
    git clone https://github.com/seu-usuario/gym8.git
    ```
 2. Abra a pasta do projeto na sua IDE preferida.
 3. Certifique-se de que a codificação do projeto está configurada para UTF-8 (para evitar problemas de acentuação na interface).
-4. (Opcional) Caso esteja utilizando o FlatLaf para o tema moderno, adicione o arquivo `.jar` do FlatLaf no Build Path / Libraries do projeto.
-5. Navegue até o pacote responsável pela inicialização do sistema (`app.Main`).
-6. Execute a classe principal (Run as > Java Application).
-7. Para testar o sistema de buscas, cadastre pelo menos dois usuários com endereços diferentes.
+4. Navegue até o pacote responsável pela inicialização do sistema (`app.Main`).
+5. Execute a classe principal (Run as > Java Application).
+6. Para testar o sistema de buscas, cadastre pelo menos dois usuários com endereços diferentes.
