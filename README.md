@@ -1,7 +1,5 @@
-🏋️‍♂️ GYM8
-📌 Nome do sistema
+🏋️‍♂️ GYM8 - Encontre parceiros de treino
 
-Gym8 - Encontre parceiros de treino.
 🎯 Objetivo
 
 O Gym8 tem como objetivo facilitar o gerenciamento da rotina fitness do usuário, permitindo o cadastro detalhado de treinos e dietas. Além disso, o sistema visa conectar praticantes de atividades físicas da mesma região, promovendo parcerias de treino através de um algoritmo de geolocalização e envio de convites interativos.
@@ -9,6 +7,7 @@ O Gym8 tem como objetivo facilitar o gerenciamento da rotina fitness do usuário
 
 Gestão de Saúde/Fitness e Rede Social Esportiva.
 O domínio abrange o acompanhamento nutricional e físico pessoal (dieta, exercícios, repetições, grupos musculares) combinado com funcionalidades de networking baseadas em localização geográfica.
+
 👥 Integrantes
 
     Kauan Ortiz
